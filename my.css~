@@ -1,0 +1,24 @@
+#h
+{
+    color: #66F;
+    background-color: #006;
+    border: groove;
+    padding: 0px 10px 0px 10px;
+}
+
+#h h4
+{
+    font-family: cursive;
+}
+
+#h ul li{
+    display: inline;
+}
+
+#map_canvas
+{
+    background-color: #CDD;
+    height: 80%;
+    border: groove;
+    padding: 10px;
+}
