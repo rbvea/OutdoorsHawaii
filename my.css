@@ -1,14 +1,19 @@
+html { height:100% }
+body { height: 100% }
+
 #h
 {
-    color: #66F;
+    color: #73BFFF;
     background-color: #006;
-    border: groove;
+    border: inset;
     padding: 0px 10px 0px 10px;
 }
 
 #h h4
 {
-    font-family: cursive;
+    font-family: Tahoma, “Lucida Grande”, Arial, sans-serif;
+    font-size: 24pt; 
+    margin-bottom: -10px;
 }
 
 #h ul li{
@@ -17,7 +22,9 @@
 
 #map_canvas
 {
-    height: 512px;
-    border: groove;
+    background-color: #000000;
+    height: 80%;
+    margin: 0px 10px 10px 10px;
+    border: inset;
     padding: 10px;
 }
