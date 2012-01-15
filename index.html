@@ -11,14 +11,12 @@
     function initialize() {
       var center = new google.maps.LatLng(21.321467,-157.723083);
       var myOptions = {
-<<<<<<< HEAD
-      zoom: 12,
-      center: center,
-      mapTypeId: google.maps.MapTypeId.SATELLITE
-    };
+        zoom: 12,
+        center: center,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      };
     var map = new google.maps.Map(document.getElementById("map_canvas"),
                                   myOptions);
-/*
     var trails = new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
       map: map,
@@ -39,52 +37,19 @@
       map_style: true,
       infowindow: true,
       auto_bound: true
-     });*/
+     });
     $('form').submit(function(ev){
       ev.stopPropagation(); ev.preventDefault();
       var value = $(this).find('input').val();
       cartodb1_gmapsv3.update(value);
     });
-=======
-        zoom: 12,
-        center: center,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-      };
-
-      var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
->>>>>>> 5f696dbef18aca1831338929f09762bfe3d43563
-
-      var trails = new google.maps.CartoDBLayer({
-        map_canvas: 'map_canvas',
-        map: map,
-        user_name:"outdoorshawaii",
-        table_name: 'trails',
-        query: "SELECT * FROM trails",
-        map_style: true,
-        infowindow: true,
-        auto_bound: true
-      });
-
-      var beaches =  new google.maps.CartoDBLayer({
-        map_canvas: 'map_canvas',
-        map: map,
-        user_name:"outdoorshawaii",
-        table_name: 'beaches',
-        query: "SELECT * FROM beaches",
-        map_style: true,
-        infowindow: true,
-        auto_bound: true
-      });
-
       $('form').submit(function(ev){
         ev.stopPropagation(); ev.preventDefault();
         var value = $(this).find('input').val();
         cartodb1_gmapsv3.update(value);
       });
     }
-    
     var loc;
-
     function toggle(obj){
       if (loc) loc.className='';
       obj.className='selected';
@@ -92,18 +57,6 @@
     }
   </script>
 </head>
-<<<<<<< HEAD
-<body onload="initialize()">
-    <div id="h">
-        <h4>Outdoors Hawaii</h4>
-        <ul class="locs">
-            <li>All Islands</li> 
-            <li>Oahu</li> 
-            <li class="selected">Kauai</li> 
-            <li>Big Island</li> 
-            <li>Maui</li>
-        </ul>
-=======
 <body onload="initialize()"
     <div id="wrapper">
       <div id="h">
@@ -126,7 +79,6 @@
         </div>
       <div id="map_canvas"></div>
       <div id="info"></div>
->>>>>>> 5f696dbef18aca1831338929f09762bfe3d43563
     </div>
 </body>
 </html>
