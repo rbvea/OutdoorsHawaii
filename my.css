@@ -1,12 +1,17 @@
 html { height: 100% }
 body { height: 100% }
 
+#wrapper
+{
+    width: 1024px;
+    height: 540px;
+}
+
 #h
 {
-    color: #D1D5DC;
-    background-color: #00A;
-    padding: 0px 1px 10px 10px;
-    margin-bottom: -24px
+    height: 60px;
+    color: #CCC;
+    background-color: #666;
 }
 
 #h h4
@@ -20,25 +25,7 @@ body { height: 100% }
 #h ul li{
     display: inline;
 }
-#map_canvas
-{
-    height: 90%;
-    width: 80%;
-    margin: 0px 10px 0px 10px;
-    padding: 10px;
-    margin-top: -3px;
-}
 
-#info
-{
-    position: absolute;
-    right: 0em;
-    top: 0em;
-    background: #FFF;
-    width: 17%;
-    height: 100%;
-    padding: 0em;
-}
 
 .locs 
 {
@@ -47,7 +34,7 @@ body { height: 100% }
     list-style: none;
     margin:0;
     padding: 0;
-    line-height: 24px;
+    line-height: 12px;
     position: relative;
 } 
 
@@ -74,4 +61,32 @@ body { height: 100% }
     border-bottom: 1px solid #111111;
     color: #000;
     z-index: 2;
+}
+
+
+#sidebar
+{
+    width: 304px;
+    height: 480px !important;
+    background-color: #333;
+    float: right;
+    height: auto;
+}
+
+#map_canvas
+{
+    width: 720px;
+    height: 480px !important;
+    background-color: #CDD;
+}
+
+#info
+{
+    position: absolute;
+    right: 0em;
+    top: 0em;
+    background: #FFF;
+    width: 17%;
+    height: 100%;
+    padding: 0em;
 }
