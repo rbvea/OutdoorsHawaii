@@ -1,4 +1,4 @@
-html { height: 100% }
+html { height: 100% } 
 body { height: 100% }
 
 #wrapper
@@ -11,7 +11,9 @@ body { height: 100% }
 {
     height: 60px;
     color: #CCC;
-    background-color: #666;
+    /* lol devil*/
+    background-color: #666; 
+    margin-bottom: -3px;
 }
 
 #h h4
@@ -27,7 +29,7 @@ body { height: 100% }
 }
 
 
-.locs 
+#locs 
 {
     text-align: left;
     color: #000;
@@ -38,12 +40,12 @@ body { height: 100% }
     position: relative;
 } 
 
-.locs li:before
+#locs li:before
 {
     z-index: 1;
 }
 
-.locs li
+#locs li
 {
     font-family: Tahoma, “Lucida Grande”, Arial;
     color: #FFE;
@@ -55,7 +57,7 @@ body { height: 100% }
     border-top-right-radius: 3px;  
 }
 
-.locs li.selected
+#locs li.selected
 {
     background: #D1D5DC;
     border-bottom: 1px solid #111111;

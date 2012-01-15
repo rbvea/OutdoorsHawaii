@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <head>
-  <!--link rel="stylesheet" type="text/css" href="cartodb.css"-->
-  <!--link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" -->
+  <link rel="stylesheet" type="text/css" href="cartodb.css"-->
+  <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" -->
   <link rel="stylesheet" type="text/css" href="my.css">
   <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
   <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="cartodb-gmapsv3.js"></script>
-  <script type="text/javascript" src="wax.g.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/Vizzuality/cartodb-gmapsv3/gh-pages/cartodb-gmapsv3.js"></script>
+  <script type="text/javascript" src="https://raw.github.com/Vizzuality/cartodb-gmapsv3/gh-pages/wax.g.js"></script>
   <script type="text/javascript">
+    var map, trails, beaches, oahu , loc, island;
+
     function initialize() {
       var center = new google.maps.LatLng(21.321467,-157.723083);
       var myOptions = {
@@ -15,9 +17,13 @@
         center: center,
         mapTypeId: google.maps.MapTypeId.SATELLITE
       };
-    var map = new google.maps.Map(document.getElementById("map_canvas"),
+    map = new google.maps.Map(document.getElementById("map_canvas"),
                                   myOptions);
-    var trails = new google.maps.CartoDBLayer({
+
+    oahu = new google.maps.LatLng(21.4389, -158.0001);
+
+
+    trails = new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
       map: map,
       user_name:"outdoorshawaii",
@@ -28,6 +34,7 @@
       auto_bound: true
      });
 
+/*
     var beaches =  new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
       map: map,
@@ -38,22 +45,21 @@
       infowindow: true,
       auto_bound: true
      });
+*/
     $('form').submit(function(ev){
       ev.stopPropagation(); ev.preventDefault();
       var value = $(this).find('input').val();
       cartodb1_gmapsv3.update(value);
     });
-      $('form').submit(function(ev){
-        ev.stopPropagation(); ev.preventDefault();
-        var value = $(this).find('input').val();
-        cartodb1_gmapsv3.update(value);
-      });
+
     }
-    var loc;
     function toggle(obj){
       if (loc) loc.className='';
       obj.className='selected';
+      island=obj.value;
       loc=obj;
+      map.setZoom(map.getZoom() + 3);
+      map.setCenter(oahu);
     }
   </script>
 </head>
@@ -61,7 +67,7 @@
     <div id="wrapper">
       <div id="h">
           <h4>Outdoors Hawaii</h4>
-          <ul class="locs">
+          <ul id="locs">
               <li onclick="toggle(this)">All Islands</li> 
               <li onclick="toggle(this)">Oahu</li> 
               <li onclick="toggle(this)">Kauai</li>
