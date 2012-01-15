@@ -11,6 +11,7 @@
     function initialize() {
       var center = new google.maps.LatLng(21.321467,-157.723083);
       var myOptions = {
+<<<<<<< HEAD
       zoom: 12,
       center: center,
       mapTypeId: google.maps.MapTypeId.SATELLITE
@@ -44,10 +45,54 @@
       var value = $(this).find('input').val();
       cartodb1_gmapsv3.update(value);
     });
+=======
+        zoom: 12,
+        center: center,
+        mapTypeId: google.maps.MapTypeId.SATELLITE
+      };
 
+      var map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+>>>>>>> 5f696dbef18aca1831338929f09762bfe3d43563
+
+      var trails = new google.maps.CartoDBLayer({
+        map_canvas: 'map_canvas',
+        map: map,
+        user_name:"outdoorshawaii",
+        table_name: 'trails',
+        query: "SELECT * FROM trails",
+        map_style: true,
+        infowindow: true,
+        auto_bound: true
+      });
+
+      var beaches =  new google.maps.CartoDBLayer({
+        map_canvas: 'map_canvas',
+        map: map,
+        user_name:"outdoorshawaii",
+        table_name: 'beaches',
+        query: "SELECT * FROM beaches",
+        map_style: true,
+        infowindow: true,
+        auto_bound: true
+      });
+
+      $('form').submit(function(ev){
+        ev.stopPropagation(); ev.preventDefault();
+        var value = $(this).find('input').val();
+        cartodb1_gmapsv3.update(value);
+      });
+    }
+    
+    var loc;
+
+    function toggle(obj){
+      if (loc) loc.className='';
+      obj.className='selected';
+      loc=obj;
     }
   </script>
 </head>
+<<<<<<< HEAD
 <body onload="initialize()">
     <div id="h">
         <h4>Outdoors Hawaii</h4>
@@ -58,8 +103,30 @@
             <li>Big Island</li> 
             <li>Maui</li>
         </ul>
+=======
+<body onload="initialize()"
+    <div id="wrapper">
+      <div id="h">
+          <h4>Outdoors Hawaii</h4>
+          <ul class="locs">
+              <li onclick="toggle(this)">All Islands</li> 
+              <li onclick="toggle(this)">Oahu</li> 
+              <li onclick="toggle(this)">Kauai</li>
+              <li onclick="toggle(this)">Big Island</li> 
+              <li onclick="toggle(this)">Maui</li>
+          </ul>
+      </div>
+      <div id="sidebar">
+            <ul>
+            <script type="text/javascript">
+                for(i=0; i<10; i++)
+                    document.write("<li>List Item " + i + "</li>");
+            </script>
+            </ul>
+        </div>
+      <div id="map_canvas"></div>
+      <div id="info"></div>
+>>>>>>> 5f696dbef18aca1831338929f09762bfe3d43563
     </div>
-    <div id="map_canvas"></div>
-    <div id="info"></div>
 </body>
 </html>
