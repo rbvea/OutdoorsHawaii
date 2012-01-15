@@ -13,7 +13,6 @@ body { height: 100% }
     color: #CCC;
     /* lol devil*/
     background-color: #666; 
-    margin-bottom: -3px;
 }
 
 #h h4
@@ -59,8 +58,8 @@ body { height: 100% }
 
 #locs li.selected
 {
-    background: #D1D5DC;
-    border-bottom: 1px solid #111111;
+    background: #CAD0D8;
+    border-bottom: 1px solid #CAD0D8;
     color: #000;
     z-index: 2;
 }

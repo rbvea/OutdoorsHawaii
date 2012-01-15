@@ -65,7 +65,7 @@
       {
 
       case "Oahu":
-        map.setZoom(10);
+        map.setZoom(01);
         map.panTo(oahu);
         break;
       case "All Islands":
