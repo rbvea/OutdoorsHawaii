@@ -5,6 +5,7 @@ body { height: 100% }
 {
     width: 1024px;
     height: 540px;
+    position: relative;
 }
 
 #h
@@ -83,11 +84,12 @@ body { height: 100% }
 
 #info
 {
+/*  Uncomment to float in bottom left corner of wrapper.
     position: absolute;
-    right: 0em;
-    top: 0em;
-    background: #FFF;
-    width: 17%;
-    height: 100%;
+    left: 0em;
+    bottom: 0em; */
+    background: #AAA;
+    width: 360px;
+    height: 240px;
     padding: 0em;
 }
