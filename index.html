@@ -11,7 +11,12 @@
     var map, trails, beaches, oahu, center, loc, island;
 
     center = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
+    kauai = new google.maps.LatLng(22.05891,-159.52698);
     oahu = new google.maps.LatLng(21.438912,-158.000056);
+    molokai = new google.maps.LatLng(21.14439,-157.02263);
+    lanai = new google.maps.LatLng(20.81660,-156.92732);
+    maui = new google.maps.LatLng(20.79836,-156.33193);
+    hawaii = new google.maps.LatLng(19.55461,-155.51147);
 
     function initialize() {
       var myOptions = {
@@ -21,8 +26,6 @@
       };
     map = new google.maps.Map(document.getElementById("map_canvas"),
                                   myOptions);
-
-
 
     trails = new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
@@ -35,7 +38,7 @@
       auto_bound: true
      });
 
-/*
+
     var beaches =  new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
       map: map,
@@ -46,7 +49,7 @@
       infowindow: true,
       auto_bound: true
      });
-*/
+
     $('form').submit(function(ev){
       ev.stopPropagation(); ev.preventDefault();
       var value = $(this).find('input').val();
@@ -63,10 +66,29 @@
 
       switch(zoom)
       {
-
+      case "Kauai":
+        map.setZoom(10);
+        map.panTo(kauai);
+        break;
       case "Oahu":
         map.setZoom(10);
         map.panTo(oahu);
+        break;
+      case "Molokai":
+        map.setZoom(10);
+        map.panTo(molokai);
+        break;
+      case "Lanai":
+        map.setZoom(10);
+        map.panTo(lanai);
+        break;
+      case "Maui":
+        map.setZoom(10);
+        map.panTo(maui);
+        break;
+      case "Big Island":
+        map.setZoom(8);
+        map.panTo(hawaii);
         break;
       case "All Islands":
         map.setZoom(7);
@@ -81,11 +103,13 @@
       <div id="h">
           <h4>Outdoors Hawaii</h4>
           <ul id="locs">
-              <li onclick="toggle(this)">All Islands</li> 
-              <li onclick="toggle(this)">Oahu</li> 
+              <li onclick="toggle(this)">All Islands</li>
               <li onclick="toggle(this)">Kauai</li>
-              <li onclick="toggle(this)">Big Island</li> 
+              <li onclick="toggle(this)">Oahu</li>
+              <li onclick="toggle(this)">Molokai</li>
+              <li onclick="toggle(this)">Lanai</li>
               <li onclick="toggle(this)">Maui</li>
+              <li onclick="toggle(this)">Big Island</li>
           </ul>
       </div>
       <div id="sidebar">
