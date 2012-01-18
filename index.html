@@ -8,11 +8,11 @@
   <script type="text/javascript" src="https://raw.github.com/Vizzuality/cartodb-gmapsv3/gh-pages/cartodb-gmapsv3.js"></script>
   <script type="text/javascript" src="https://raw.github.com/Vizzuality/cartodb-gmapsv3/gh-pages/wax.g.js"></script>
   <script type="text/javascript">
-    var map, trails, beaches, oahu, center, loc, island;
+    var map, trails, beaches, oahu, center, loc, island, data;
 
     center = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
-    kauai = new google.maps.LatLng(22.05891,-159.52698);
     oahu = new google.maps.LatLng(21.438912,-158.000056);
+    kauai = new google.maps.LatLng(22.05891,-159.52698);
     molokai = new google.maps.LatLng(21.14439,-157.02263);
     lanai = new google.maps.LatLng(20.81660,-156.92732);
     maui = new google.maps.LatLng(20.79836,-156.33193);
@@ -27,7 +27,7 @@
     map = new google.maps.Map(document.getElementById("map_canvas"),
                                   myOptions);
 
-    trails = new google.maps.CartoDBLayer({
+    var trails=  new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
       map: map,
       user_name:"outdoorshawaii",
@@ -39,7 +39,8 @@
      });
 
 
-    var beaches =  new google.maps.CartoDBLayer({
+    /*
+var beaches =  new google.maps.CartoDBLayer({
       map_canvas: 'map_canvas',
       map: map,
       user_name:"outdoorshawaii",
@@ -49,15 +50,16 @@
       infowindow: true,
       auto_bound: true
      });
+    */
 
     $('form').submit(function(ev){
       ev.stopPropagation(); ev.preventDefault();
       var value = $(this).find('input').val();
       cartodb1_gmapsv3.update(value);
     });
-
-    }
-    function toggle(obj){
+ }
+    
+ function toggle(obj){
       if (loc) loc.className='';
       obj.className='selected';
       loc=obj;
@@ -66,13 +68,14 @@
 
       switch(zoom)
       {
-      case "Kauai":
-        map.setZoom(10);
-        map.panTo(kauai);
-        break;
+
       case "Oahu":
         map.setZoom(10);
         map.panTo(oahu);
+        break;
+      case "Kauai":
+        map.setZoom(10);
+        map.panTo(kauai);
         break;
       case "Molokai":
         map.setZoom(10);
@@ -103,7 +106,7 @@
       <div id="h">
           <h4>Outdoors Hawaii</h4>
           <ul id="locs">
-              <li onclick="toggle(this)">All Islands</li>
+	    <li onclick="toggle(this)">All Islands</li>
               <li onclick="toggle(this)">Kauai</li>
               <li onclick="toggle(this)">Oahu</li>
               <li onclick="toggle(this)">Molokai</li>
@@ -113,13 +116,19 @@
           </ul>
       </div>
       <div id="sidebar">
-            <ul>
-            <script type="text/javascript">
-                for(i=0; i<10; i++)
-                    document.write("<li>List Item " + i + "</li>");
-            </script>
-            </ul>
-        </div>
+	<ul>
+ <script type="text/javascript">
+   /* Use jQuery to get the json from cartodb, loop through each of the rows and output the names of hikes.*/ 
+	$.getJSON('http://outdoorshawaii.cartodb.com/api/v1/sql?callback=?',  //url
+	      { q: "SELECT * FROM trails" },                                  //the query to pass
+              function(result) {                                              // function to print out names.
+                 $.each(result.rows, function(i,val) {               
+	           document.write("<li>" + val.description + "</li>");
+                 })
+              });
+      </script>
+        </ul>
+      </div>
       <div id="map_canvas"></div>
       <div id="info"></div>
     </div>
