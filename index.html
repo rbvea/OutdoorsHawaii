@@ -123,7 +123,7 @@ var beaches =  new google.maps.CartoDBLayer({
 	      { q: "SELECT * FROM trails" },                                  //the query to pass
               function(result) {                                              // function to print out names.
                  $.each(result.rows, function(i,val) {               
-	           document.write("<li>" + val.description + "</li>");
+                    $('#sidebar').append('<li>' + val.description + '</li>');
                  })
               });
       </script>
