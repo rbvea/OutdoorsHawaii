@@ -1,0 +1,35 @@
+#islands 
+{
+    text-align: left;
+    color: #000;
+    list-style: none;
+    margin:0;
+    padding: 0;
+    line-height: 12px;
+    position: relative;
+} 
+
+#islands li:before
+{
+    z-index: 1;
+}
+
+#islands li
+{
+    font-family: Tahoma, “Lucida Grande”, Arial;
+    color: #FFE;
+    margin: 0 10px 0px 10px;
+    padding: 0 10px;
+    background-color: #858585;
+    display: inline-block;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;  
+}
+
+#islands li.selected
+{
+    background: #CAD0D8;
+    border-bottom: 1px solid #CAD0D8;
+    color: #000;
+    z-index: 2;
+}
