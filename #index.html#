@@ -40,23 +40,10 @@
       for(var i = 0; i < beaches.length; i++) {
 	 $.getJSON(
 	    "http://outdoorshawaii.cartodb.com/api/v1/sql?callback=?",
-	     { q: "SELECT * FROM beaches WHERE island='" + isles[i] + "'"},
+	     { q: query },
 	     function(data) {
-		$.each(data.rows, function(i, val) {
-			 $("#sidebar").append(val.description + "<br/><br/>");
-		 });
-	     });
-     }
-
-      for(var i = 0; i < trails.length; i++) {
-	 $.getJSON(
-	    "http://outdoorshawaii.cartodb.com/api/v1/sql?callback=?",
-	     { q: "SELECT * FROM trails WHERE island='" + isles[i] + "'"},
-	     function(data) {
-		$.each(data.rows, function(i, val) {
-			 $("#sidebar").append(val.description + "<br/><br/>");
-		 });
-	     });
+	    }
+	);
      }
    </script> 
     <footer>Powered by Google Maps, CartoDB, and caffeine . . .</footer>

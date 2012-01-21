@@ -14,9 +14,9 @@ var trails = new Array(6);
 var beaches_data = new Array(6);
 var trails_data = new Array(6);
 
-var isles = new Array("kauai", "oahu", "molokai", "lanai", "maui", "hawaii");
 function initialize() 
 {
+    var isles = new Array("kauai", "oahu", "molokai", "lanai", "maui", "hawaii");
     var myOptions = {
         zoom: 10,
         mapTypeId: google.maps.MapTypeId.HYBRID
@@ -37,14 +37,7 @@ function initialize()
 	    auto_bound: true
 	});
 	 
-	$.getJSON(
-	    "http://outdoorshawaii.cartodb.com/api/v1/sql?callback=?",
-	     { q: query },
-	     function(data) {
-		 beaches_data[i] = data;
-	     }
-	);
-     }
+	}
 
     for(var i = 0; i < isles.length; i++)  {
 	var q =  "SELECT * FROM trails WHERE island='" + isles[i] + "'";
