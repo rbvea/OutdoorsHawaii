@@ -28,13 +28,17 @@ function updateOverlay() {
 		    if (b) {
 			beaches[i].show();
 			$(this.value).each(function() {
-			    $(this).style.display = 'block';
+			    if ($(this).hasClass("beach")) {
+				$(this).style.display = 'block';
+			    }
 			});
 		    } 
 		    if (t) {
 			trails[i].show();
 			$(this.value).each(function() {
-			    $(this).style.display = 'block';
+			    if ($(this).hasClass("trail")) {
+				$(this).style.display = 'block';
+			    }
 			});
 		    } 
 		}
@@ -43,13 +47,17 @@ function updateOverlay() {
 		if (b) {
 		    beaches[index - 1].show();
 		    $(this.value).each(function() {
-			$(this).style.display = 'block';
+			if ($(this).hasClass("beach")) {
+			    $(this).style.display = 'block';
+			}
 		    });
 		} 	
 		if (t) {
 		    trails[index - 1].show();
 		    $(this.value).each(function() {
-		        $(this).style.display = 'block';
+			if ($(this).hasClass("trail")) {
+			    $(this).style.display = 'block';
+			}
 		    });
 		} 
 	    }
