@@ -42,3 +42,19 @@ function toggle(obj){
     }
 }
 
+function toggleOverlay(x) {
+    var a, b;
+    if (document.getElementsByName("beaches").checked) {
+        trails[x].show();
+    }
+    else {
+        trails[x].hide();
+    }
+    if (document.getElementsByName("trails").checked) {
+        beaches[x].show()
+    }
+    else {
+        beaches[x].hide();
+    }
+}
+
