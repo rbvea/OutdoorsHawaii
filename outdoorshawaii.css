@@ -59,6 +59,7 @@ a:hover {
 	color: #d1e8eb;
 	font-size: large;
 	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
+	cursor: pointer;
 }
 
 .tabs:link {
@@ -101,6 +102,7 @@ a:hover {
 	color: #d1e8eb;
 	font-size: large;
 	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
+	cursor: pointer;
 }
 
 #islands 
