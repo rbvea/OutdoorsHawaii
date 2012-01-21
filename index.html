@@ -3,11 +3,20 @@
 <html>
 <head>
     <title>Page Title</title>
+    <link rel="stylesheet" type="text/css" href="outdoorshawaii.css">
+    <script type="text/javascript" src="query.js"></script>
+    <script type="text/javascript" src="action.js"></script>
 </head>
 
 <body>
 
-<header></header>
+<header>
+    <div id="islands"></div>
+    <div id="overlay">
+        <input name="beaches" value="beaches" onclick="setOverlay(this)" type="checkbox">Beaches</input>
+        <input name="trails" value="trails" onclick="setOverlay(this)" type="checkbox">Trails</input>
+    </div>
+</header>
 <div id="map_canvas"></div>
 <footer></footer>
 
