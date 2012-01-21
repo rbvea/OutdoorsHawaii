@@ -1,60 +1,40 @@
-function setOverlay(obj) {
-    
-}
-
 function toggle(obj){
     $(obj).toggleClass("selected");
-
-    var zoom = $(obj).text();
-
-    //Switch on object text
-    switch(zoom)
-    {
-
-    case "Oahu":
-        map.setZoom(10);
-        map.panTo(oahu);
-        break;
-    case "Kauai":
-        map.setZoom(10);
-        map.panTo(kauai);
-        break;
-    case "Molokai":
-        map.setZoom(10);
-        map.panTo(molokai);
-        break;
-    case "Lanai":
-        map.setZoom(10);
-        map.panTo(lanai);
-        break;
-    case "Maui":
-        map.setZoom(10);
-        map.panTo(maui);
-        break;
-    case "Big Island":
-        map.setZoom(8);
-        map.panTo(hawaii);
-        break;
-    case "All Islands":
-        map.setZoom(7);
-        map.panTo(center);
-        break;
+    if( $(obj).text() == "All Islands") {
+	var fo =  document.getElementsByName("beaches").checked;
+	var of =  document.getElementsByName("trails").checked;
+	if (document.getElementsByName("beaches").checked) {
+	    for (var i = 0; i < beaches.length; i++) {
+		if (fo) {
+		    beaches[i].show();
+		} else {
+		    beaches[i].hide();
+		}
+	    }
+	    
+	    if (document.getElementsByName("trails").checked) {
+		for (var i = 0; i < trails.length; i++) {
+		    if (fo) {
+			trails[i].show();
+		    } else {
+			trails[i].hide();
+		    }
+		}
+	    }
+	}
+	else {
+	    $("#islands .tabs").each(function(i, checked) {
+		if( $(checked).hasClass("selected")) {
+		    if(document.getElementsByName("beaches").checked) {
+			beaches[i].show();
+		    }
+		    if(document.getElementsByName("trails").checked) {
+			trails[i].show();
+		    }
+		} else {
+		    beaches[i].hide();
+		    trails[i].hide();
+		}
+	    });
+	}
     }
-}
-
-function toggleOverlay(x) {
-    var a, b;
-    if (document.getElementsByName("beaches").checked) {
-        trails[x].show();
-    }
-    else {
-        trails[x].hide();
-    }
-    if (document.getElementsByName("trails").checked) {
-        beaches[x].show()
-    }
-    else {
-        beaches[x].hide();
-    }
-}
-
