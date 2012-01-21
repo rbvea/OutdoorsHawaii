@@ -59,23 +59,29 @@ function findCenter() {
 	});
 	
 	if (count == 0) {
-		middle = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
-	}
-	else {
-		middle = new google.maps.LatLng((minlat + maxlat)/2, (minlong + maxlong)/2);
-	}
-
-	var longdif = maxlong - minlong;
-	//var latdif = maxlat - minlat;
-	
-	if(longdif > 2) {
-		map.setZoom(7);
-	}
-	else if(longdif > 1) {
+		//middle = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
+		middle = new google.maps.LatLng(20.6, -157.37989649999997);
 		map.setZoom(8);
 	}
 	else {
-		map.setZoom(10);
+		middle = new google.maps.LatLng((minlat + maxlat)/2, (minlong + maxlong)/2);
+			var longdif = maxlong - minlong;
+		//var latdif = maxlat - minlat;
+		
+		if(longdif > 3) {
+			map.setZoom(8);
+		}
+		else if(longdif > 0.3) {
+			map.setZoom(9);
+		}
+		else {
+			if(Math.abs(maxlong - hawaii_c.longitude) < 0.1) {
+				map.setZoom(9);
+			}
+			else {
+				map.setZoom(11);
+			}
+		}
 	}
 	map.panTo(middle);
 } //end findcenter
