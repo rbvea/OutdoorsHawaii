@@ -92,7 +92,7 @@ a:hover {
 	text-transform: none;
 	text-decoration: none;
 	font-weight: bold;
-	text-shadow: 0px 0px 10px #040402;
+	text-shadow: 0px 0px 10px black;
 	letter-spacing: 10px;
 	color: #d1e8eb;
 	font-size: large;
@@ -101,18 +101,17 @@ a:hover {
 
 #islands 
 {
+    background-color: black;
+    font-size: large;
+    letter-spacing: 1px;
+    font-family: herculanum;
     text-align: left;
-    color: #000;
+    color: white;
     list-style: none;
-    margin:0;
-    padding: 0;
-    line-height: 12px;
+    margin: 0px;
+    padding: 0px;
+    line-height: 40px;
     position: relative;
-} 
-
-#islands li:before
-{
-    z-index: 1;
 }
 
 #islands li
@@ -127,11 +126,39 @@ a:hover {
     border-top-right-radius: 3px;
 }
 
+#islands li.before
+{
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: none;
+    font-family: herculanum;
+    background-color: #c9ffde;
+    text-shadow: 0px 0px;
+    margin-right: 10px;
+    margin-left: 10px;
+    font-size: large;
+    letter-spacing: 2px;
+    text-align: left;
+    color: black;
+    list-style: none;
+    line-height: 28px;
+    position: relative;
+}
+
 #islands li.selected
 {
-    background: #CAD0D8;
+    border-style: ridge;
+    margin-right: 10px;
+    margin-left: 10px;
+    letter-spacing: 2px;
+    text-decoration: none;
+    text-transform: none;
+    font-weight: bold;
+    font-size: large;
+    font-family: Herculanum;
+    background: black;
     border-bottom: 1px solid #CAD0D8;
-    color: #000;
+    color: #ecf3ff;
     z-index: 2;
 }
 
