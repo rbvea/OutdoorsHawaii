@@ -12,7 +12,7 @@ body{ height: 100% }
 	color: black;
 	text-shadow: 0px 0px 100px #42b465;
 	font-weight: bold;
-	font-family: Chalkduster;
+	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 	letter-spacing: 10px;
 	text-align: left;
 	font-size: 56px ;
@@ -25,7 +25,7 @@ a:link {
 	color: #217e51;
 	text-shadow: 0px 0px;
 	letter-spacing: 1px;
-	font-family: "Comic Sans MS";
+	font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 	font-size: medium;
 }
 
@@ -35,7 +35,7 @@ a:visited {
 	color: #89a598;
 	text-shadow: 0px 0px 10px black;
 	letter-spacing: 1px;
-	font-family: "Comic Sans MS";
+	font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 	font-size: medium;
 }
 
@@ -47,7 +47,7 @@ a:active {
 	letter-spacing: 10px;
 	color: black;
 	font-size: large;
-	font-family: Chalkduster;
+	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 }
 
 a:hover {
@@ -58,7 +58,7 @@ a:hover {
 	letter-spacing: 10px;
 	color: #d1e8eb;
 	font-size: large;
-	font-family: Chalkduster;
+	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 }
 
 .tabs:link {
@@ -67,7 +67,7 @@ a:hover {
 	color: #217e51;
 	text-shadow: 0px 0px;
 	letter-spacing: 1px;
-	font-family: "Comic Sans MS";
+	font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 	font-size: medium;
 }
 
@@ -77,7 +77,7 @@ a:hover {
 	color: #89a598;
 	text-shadow: 0px 0px 10px black;
 	letter-spacing: 1px;
-	font-family: "Comic Sans MS";
+	font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 	font-size: medium;
 }
 
@@ -89,7 +89,7 @@ a:hover {
 	letter-spacing: 10px;
 	color: black;
 	font-size: large;
-	font-family: Chalkduster;
+	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 }
 
 .tabs:hover {
@@ -100,7 +100,7 @@ a:hover {
 	letter-spacing: 10px;
 	color: #d1e8eb;
 	font-size: large;
-	font-family: Chalkduster;
+	font-family: Chalkduster, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 }
 
 #islands 
@@ -108,7 +108,7 @@ a:hover {
     background-color: black;
     font-size: large;
     letter-spacing: 1px;
-    font-family: herculanum;
+    font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
     text-align: left;
     color: white;
     list-style: none;
@@ -121,7 +121,7 @@ a:hover {
 
 #islands li
 {
-    font-family: Tahoma, “Lucida Grande”, Arial;
+    font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
     color: #FFE;
     margin: 0 10px 0px 10px;
     padding: 0 10px;
@@ -136,7 +136,7 @@ a:hover {
     font-weight: bold;
     text-decoration: none;
     text-transform: none;
-    font-family: herculanum;
+    font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
     background-color: #c9ffde;
     text-shadow: 0px 0px;
     margin-right: 10px;
@@ -160,7 +160,7 @@ a:hover {
     text-transform: none;
     font-weight: bold;
     font-size: large;
-    font-family: Herculanum;
+    font-family: Herculanum, "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
     background: black;
     border-bottom: 1px solid #CAD0D8;
     color: #ecf3ff;
