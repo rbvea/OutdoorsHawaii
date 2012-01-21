@@ -1,3 +1,100 @@
+#page_title {
+	/* background-image: url(pic.png); */
+	border-style: none;
+	background-position: 0 0px;
+	color: black;
+	text-shadow: 0px 0px 100px #42b465;
+	font-weight: bold;
+	font-family: Chalkduster;
+	letter-spacing: 10px;
+	text-align: left;
+	font-size: 56px ;
+}
+
+a:link {
+	text-decoration: none;
+	text-transform: none;
+	color: #217e51;
+	text-shadow: 0px 0px;
+	letter-spacing: 1px;
+	font-family: "Comic Sans MS";
+	font-size: medium;
+}
+
+a:visited {
+	text-decoration: none;
+	text-transform: none;
+	color: #89a598;
+	text-shadow: 0px 0px 10px black;
+	letter-spacing: 1px;
+	font-family: "Comic Sans MS";
+	font-size: medium;
+}
+
+a:active {
+	text-transform: uppercase;
+	text-decoration: line-through;
+	font-weight: bold;
+	text-shadow: 0px 0px 10px #d1e8eb;
+	letter-spacing: 10px;
+	color: black;
+	font-size: large;
+	font-family: Chalkduster;
+}
+
+a:hover {
+	text-transform: none;
+	text-decoration: none;
+	font-weight: bold;
+	text-shadow: 0px 0px 10px #040402;
+	letter-spacing: 10px;
+	color: #d1e8eb;
+	font-size: large;
+	font-family: Chalkduster;
+}
+
+.tabs:link {
+	text-decoration: none;
+	text-transform: none;
+	color: #217e51;
+	text-shadow: 0px 0px;
+	letter-spacing: 1px;
+	font-family: "Comic Sans MS";
+	font-size: medium;
+}
+
+.tabs:visited {
+	text-decoration: none;
+	text-transform: none;
+	color: #89a598;
+	text-shadow: 0px 0px 10px black;
+	letter-spacing: 1px;
+	font-family: "Comic Sans MS";
+	font-size: medium;
+}
+
+.tabs:active {
+	text-transform: uppercase;
+	text-decoration: line-through;
+	font-weight: bold;
+	text-shadow: 0px 0px 10px #d1e8eb;
+	letter-spacing: 10px;
+	color: black;
+	font-size: large;
+	font-family: Chalkduster;
+}
+
+.tabs:hover {
+	text-transform: none;
+	text-decoration: none;
+	font-weight: bold;
+	text-shadow: 0px 0px 10px #040402;
+	letter-spacing: 10px;
+	color: #d1e8eb;
+	font-size: large;
+	font-family: Chalkduster;
+}
+
 #islands 
 {
     text-align: left;
