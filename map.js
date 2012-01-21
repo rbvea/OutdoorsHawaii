@@ -62,6 +62,18 @@ function findcenter() {
 	else {
 		middle = new google.maps.LatLng((minlat + maxlat)/2, (minlong + maxlong)/2);
 	}
-	return middle;
+	var longdif = maxlong - minlong;
+	//var latdif = maxlat - minlat;
+	
+	if(longdif > 2) {
+		map.setZoom(7);
+	}
+	else if(longdif > 1) {
+		map.setZoom(8);
+	}
+	else {
+		map.setZoom(10);
+	}
+	map.panTo(middle);
 } //end findcenter
 	
