@@ -43,7 +43,7 @@
 	     { q: "SELECT * FROM beaches WHERE island='" + isles[i] + "'"},
 	     function(data) {
 		$.each(data.rows, function(i, val) {
-			 $("#sidebar").append(val.description + "<br/><br/>");
+			 $("#sidebar").append("<div class='" + isles[i] + "'/> " + val.description + "</div>");
 		 });
 	     });
      }
@@ -54,7 +54,7 @@
 	     { q: "SELECT * FROM trails WHERE island='" + isles[i] + "'"},
 	     function(data) {
 		$.each(data.rows, function(i, val) {
-			 $("#sidebar").append(val.description + "<br/><br/>");
+			 $("#sidebar").append("<div class='" + isles[i] + "'/> " + val.description + "</div>");
 		 });
 	     });
      }
@@ -62,4 +62,3 @@
     <footer>Powered by Google Maps, CartoDB, and caffeine . . .</footer>
 </div>
 </body>
-</html>
