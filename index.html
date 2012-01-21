@@ -13,6 +13,7 @@
 
     <script type="text/javascript" src="query.js"></script>
     <script type="text/javascript" src="action.js"></script>
+    <script type="text/javascript" src="map.js"></script>
 </head>
 
 <body onload="initialize()">
@@ -21,11 +22,11 @@
     <header>
         <div id="page_title">Outdoors Hawaii</div>
         <div id="overlay">
-            <input id="beaches" value="beaches" checked="checked" type="checkbox">Beaches</input>
-            <input id="trails" value="trails" checked="checked" type="checkbox">Trails</input>
+            <input id="beaches" value="beaches" onclick="update()" checked="checked" type="checkbox">Beaches</input>
+            <input id="trails" value="trails" onclick="update()" checked="checked" type="checkbox">Trails</input>
         </div>
         <ul id="islands">
-            <li onclick="toggle(this)" class="selected"><span class="tabs">All Islands</span></li>
+            <li onclick="toggle(this)" class="before selected"><span class="tabs">All Islands</span></li>
             <li onclick="toggle(this)" class="before"><span class="tabs">Kauai</span></li>
             <li onclick="toggle(this)" class="before"><span class="tabs">Oahu</span></li>
             <li onclick="toggle(this)" class="before"><span class="tabs">Molokai</span></li>

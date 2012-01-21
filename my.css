@@ -1,0 +1,106 @@
+html { height: 100% } 
+body { height: 100% }
+
+#wrapper
+{
+    width: 1024px;
+    height: 540px;
+    position: relative;
+}
+
+#h
+{
+    height: 60px;
+    color: #CCC;
+    /* lol devil*/
+    background-color: #666; 
+}
+
+#h h4
+{
+    font-family: Tahoma, “Lucida Grande”, Arial, sans-serif;
+    font-size: 24pt; 
+    padding: 0px 10px 0px 10px;
+    margin-bottom: 5px;
+}
+
+#h ul li
+{
+    display: inline;
+}
+
+#locs 
+{
+    text-align: left;
+    color: #000;
+    list-style: none;
+    margin:0;
+    padding: 0;
+    line-height: 12px;
+    position: relative;
+} 
+
+#locs li:before
+{
+    z-index: 1;
+}
+
+#locs li
+{
+    font-family: Tahoma, “Lucida Grande”, Arial;
+    color: #FFE;
+    margin: 0 10px 0px 10px;
+    padding: 0 10px;
+    background-color: #858585;
+    display: inline-block;
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;  
+}
+
+#locs li .last
+{
+    margin-right: 5px;
+    border-right: 1px solid #AAA;
+}
+
+#locs li:after
+{
+    border-right: 1px solid #FFF;
+}
+
+#options_div
+{
+    position: static;
+    padding: 0px;
+    background-color: #D8D8D8;
+    color: #ffffff;
+}
+
+#accordion
+{
+    width: 304px;
+    height: 480px !important;
+    background-color: #333;
+    float: right;
+    height: auto;
+    overflow: scroll;
+}
+
+#map_canvas
+{
+    width: 720px;
+    height: 480px;
+    background-color: #CDD;
+}
+
+#info
+{
+/*  Uncomment to float in bottom left corner of wrapper.
+    position: absolute;
+    left: 0em;
+    bottom: 0em; */
+    background: #AAA;
+    width: 360px;
+    height: 240px;
+    padding: 0em;
+}

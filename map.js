@@ -31,7 +31,7 @@ function findCenter() {
 	$('li').each(function(index) {
 		if (index > 0) {
 			if ($(this).hasClass("selected")) {
-				if(index == 1) {
+				if(count == 0) {
 					minlat = islandcoords[index - 1].latitude;
 					maxlat = minlat;
 					minlong = islandcoords[index - 1].longitude;
