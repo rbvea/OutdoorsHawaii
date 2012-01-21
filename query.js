@@ -1,3 +1,5 @@
+var map;
+
 var center = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
 var oahu = new google.maps.LatLng(21.438912,-158.000056);
 var kauai = new google.maps.LatLng(22.05891,-159.52698);
@@ -24,13 +26,12 @@ function initialize()
           zoom: 10,
           mapTypeId: google.maps.MapTypeId.HYBRID
         };
-        var map = new google.maps.Map(document.getElementById("map_canvas"),
+        map = new google.maps.Map(document.getElementById("map_canvas"),
             myOptions);
 
     for(var v = 0; v < overlay.length; v++) {
 	for(var i = 0; i < view.length; i++)  {
 	    var q =  "SELECT * FROM " + overlay[v] + " WHERE island='" + islands[i] + "'";
-	    alert(q);
 	    $("body").append(overlay[v] + " " + islands[i]);
 
 	    this.view[i] = new google.maps.CartoDBLayer({
