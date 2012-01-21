@@ -1,3 +1,6 @@
+html{ height:100% }
+body{ height: 100% }
+
 #wrapper {
     position: relative;
 }
@@ -13,6 +16,7 @@
 	letter-spacing: 10px;
 	text-align: left;
 	font-size: 56px ;
+	height:2%;
 }
 
 a:link {
@@ -108,6 +112,7 @@ a:hover {
     text-align: left;
     color: white;
     list-style: none;
+    height: 5%;
     margin: 0px;
     padding: 0px;
     line-height: 40px;
@@ -160,6 +165,24 @@ a:hover {
     border-bottom: 1px solid #CAD0D8;
     color: #ecf3ff;
     z-index: 2;
+}
+
+#sidebar
+{
+    background-color: #333;
+    float: right;
+    width: 20%;
+    height: 80%;;
+    overflow: scroll;
+}
+
+#map_canvas
+{
+    height: 100%;
+    width:80%;
+    height:80%;
+    float:left;
+    position:relative;
 }
 
 footer {
