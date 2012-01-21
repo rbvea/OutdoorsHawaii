@@ -1,3 +1,7 @@
+#wrapper {
+    position: relative;
+}
+
 #page_title {
 	/* background-image: url(pic.png); */
 	border-style: none;
@@ -129,4 +133,10 @@ a:hover {
     border-bottom: 1px solid #CAD0D8;
     color: #000;
     z-index: 2;
+}
+
+footer {
+    color: #FFF;
+    position: absolute;
+    bottom: 0px;
 }
