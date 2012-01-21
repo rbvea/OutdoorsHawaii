@@ -19,7 +19,7 @@ hawaii_c = new island(19.55461,-155.51147);
 var islandcoords = [kauai_c, oahu_c, molokai_c, lanai_c, maui_c, hawaii_c];
 
 
-function findcenter() {
+function findCenter() {
 	var i = 0;
 	var minlat = 0;
 	var maxlat = 0;
@@ -28,40 +28,43 @@ function findcenter() {
 	var count = 0;
 	var templat = 0;
 	var templong = 0;
-	for(i = 0; i < islands.length; i++) {
-		if(islands[i] == true) {
-			if(count == 0) {
-				minlat = islandcoords[i].latitude;
-				maxlat = minlat;
-				minlong = islandcoords[i].longitude;
-				maxlong = minlong;
+	$('li').each(function(index) {
+		if (index > 0) {
+			if ($(this).hasClass("selected")) {
+				if(index == 1) {
+					minlat = islandcoords[index - 1].latitude;
+					maxlat = minlat;
+					minlong = islandcoords[index - 1].longitude;
+					maxlong = minlong;
+				}
+				else {
+					templat = islandcoords[index - 1].latitude;
+					templong = islandcoords[index - 1].longitude;
+					if(templat < minlat) {
+						minlat = templat;
+					}
+					else if(templat > maxlat) {
+						maxlat = templat;
+					}
+					if(templong < minlong) {
+						minlong = templong;
+					}
+					else if(templong > maxlong) {
+						maxlong = templong;
+					}
+				}
+				count++;
 			}
-			else {
-				templat = islandcoords[i].latitude;
-				templong = islandcoords[i].longitude;
-				if(templat < minlat) {
-					minlat = templat;
-				}
-				else if(templat > maxlat) {
-					maxlat = templat;
-				}
-				if(templong < minlong) {
-					minlong = templong;
-				}
-				else if(templong > maxlong) {
-					maxlong = templong;
-				}
-			}			
-			count++;
 		}
-	}
-
-	if(count == 0) {
+	});
+	
+	if (count == 0) {
 		middle = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
 	}
 	else {
 		middle = new google.maps.LatLng((minlat + maxlat)/2, (minlong + maxlong)/2);
 	}
+
 	var longdif = maxlong - minlong;
 	//var latdif = maxlat - minlat;
 	
