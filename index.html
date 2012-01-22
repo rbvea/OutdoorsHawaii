@@ -36,14 +36,14 @@
     </header>
     <div id="map_canvas"></div>
     <div id="sidebar"></div>
-    <script type="text/javascript">
+    <table><script type="text/javascript">
       for(var i = 0; i < beaches.length; i++) {
 	 $.getJSON(
 	    "http://outdoorshawaii.cartodb.com/api/v1/sql?callback=?",
 	     { q: "SELECT * FROM beaches WHERE island='" + isles[i] + "'"},
 	     function(data) {
 		$.each(data.rows, function(i, val) {
-			 $("#sidebar").append("<div class='" + isles[i] + "'/> " + val.description + "</div>");
+			 $("#sidebar").append("<tr><td><div class='" + isles[i] + "'/><span class='beach_element'>" + val.description + "</span></div></td></tr>");
 		 });
 	     });
      }
@@ -54,11 +54,11 @@
 	     { q: "SELECT * FROM trails WHERE island='" + isles[i] + "'"},
 	     function(data) {
 		$.each(data.rows, function(i, val) {
-			 $("#sidebar").append("<div class='" + isles[i] + "'/> " + val.description + "</div>");
+			 $("#sidebar").append("<tr><td><div class='" + isles[i] + "'/><span class='trail_element'>" + val.description + "</span></div></td></tr>");
 		 });
 	     });
      }
-   </script> 
+   </script></table>
     <footer>Powered by Google Maps, CartoDB, and caffeine . . .</footer>
 </div>
 </body>

@@ -171,11 +171,36 @@ a:hover {
 
 #sidebar
 {
-    background-color: #333;
+    border-spacing: 0px 5px;
+    background-color: black;
     float: right;
     width: 20%;
-    height: 80%;;
+    height: 80%;
     overflow: scroll;
+    table-layout: fixed;
+}
+
+table
+{
+	border: 5px solid white;
+}
+
+.beach_element
+{
+	letter-spacing: 0px;
+	font-size: small;
+	color: #3585ff;
+	cursor: pointer;
+	font-family: "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
+}
+
+.trail_element
+{
+	letter-spacing: 0px;
+	font-size: small;
+	color: #42c73b;
+	cursor: pointer;
+	font-family: "Comic Sans MS", Monaco, "Trebuchet MS", sans-serif;
 }
 
 #map_canvas
