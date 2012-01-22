@@ -1,0 +1,16 @@
+Authors:
+	Russell Vea
+	Tony Gaskell
+	Lori Nakamoto
+	Jordan Takayama
+	Marifel Barbasa
+
+Written in:
+	HTML, CSS, JavaScript, JQuery, JSON, SQL
+
+EXECUTION INSTRUCTIONS:
+1) Make sure that JavaScript is enabled in your browser.
+2) Run the application.
+
+APPLICATION DESCRIPTION:
+This web application provides beach and trail information on six of the eight main islands of Hawaii: Kauai, Oahu, Molokai, Lanai, Maui, and the Big Island.  It combines the power of Google Maps and CartoDB, a free-to-use online geospatial database server.  This application is intended to be open source to allow interested developers to add more user-friendly features.
