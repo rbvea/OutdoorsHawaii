@@ -40,18 +40,10 @@ function findCenter() {
 				else {
 					templat = islandcoords[index - 1].latitude;
 					templong = islandcoords[index - 1].longitude;
-					if(templat < minlat) {
-						minlat = templat;
-					}
-					else if(templat > maxlat) {
-						maxlat = templat;
-					}
-					if(templong < minlong) {
-						minlong = templong;
-					}
-					else if(templong > maxlong) {
-						maxlong = templong;
-					}
+					minlat = Math.min(templat, minlat);
+					maxlat = Math.max(templat, maxlat);
+					minlong = Math.min(templong, minlong);
+					maxlong = Math.max(templong, maxlong);
 				}
 				count++;
 			}
