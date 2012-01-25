@@ -9,7 +9,7 @@ function update() {
     showBeaches = document.getElementById("beaches").checked;
     showTrails = document.getElementById("trails").checked;
     $('li').each(function(index) {
-	if( $(this).hasClass("selected") ){
+	if ($(this).hasClass("selected")) {
 	    if(index == 0) {
 		islands = ["kauai", "oahu", "molokai", "lanai", "maui", "hawaii"];
 		return false;	// Break out of $.each() loop
@@ -21,13 +21,13 @@ function update() {
 	}
 	else {
 	    if (index > 0) {
-		if ($.inArray($(this).attr("id"), islands) > 0) {
+		if ($.inArray($(this).attr("id"), islands) > -1) {
 		    islands.splice(islands.indexOf($(this).attr("id")), 1);
 		}
 	    }
 	}
     });
-    findCenter();
+//    findCenter();
     updateLayers();
 }
 
