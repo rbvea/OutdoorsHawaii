@@ -1,0 +1,8 @@
+{
+    "description": "Outdoors Hawaii", 
+    "bounds": "-160.7492,18.6645,-154.075,22.7281", 
+    "minzoom": "8", 
+    "version": "1.0.0", 
+    "maxzoom": "10", 
+    "name": "Outdoors Hawaii"
+}

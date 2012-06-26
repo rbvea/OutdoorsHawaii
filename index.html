@@ -1,136 +1,17 @@
 <!DOCTYPE html>
 <head>
-  <link rel="stylesheet" type="text/css" href="cartodb.css"-->
-  <link href="http://code.google.com/apis/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" -->
-  <link rel="stylesheet" type="text/css" href="my.css">
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
-  <script type="text/javascript" src="http://maps.google.com/maps/api/js?sensor=false"></script>
-  <script type="text/javascript" src="https://raw.github.com/Vizzuality/cartodb-gmapsv3/gh-pages/cartodb-gmapsv3.js"></script>
-  <script type="text/javascript" src="https://raw.github.com/Vizzuality/cartodb-gmapsv3/gh-pages/wax.g.js"></script>
-  <script type="text/javascript">
-    var map, trails, beaches, oahu, center, loc, island, data;
+    <title>Outdoors Hawaii</title>
 
-    center = new google.maps.LatLng(21.048400224902007, -157.37989649999997);
-    oahu = new google.maps.LatLng(21.438912,-158.000056);
-    kauai = new google.maps.LatLng(22.05891,-159.52698);
-    molokai = new google.maps.LatLng(21.14439,-157.02263);
-    lanai = new google.maps.LatLng(20.81660,-156.92732);
-    maui = new google.maps.LatLng(20.79836,-156.33193);
-    hawaii = new google.maps.LatLng(19.55461,-155.51147);
+    <!-- Leaflet files -->
+    <script type="text/javascript"  src="leaflet/leaflet.js"></script>
+    <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css"/>
+    <link rel="stylesheet" type="text/css" href="rbvea.css"/>
 
-    function initialize() {
-      var myOptions = {
-        zoom: 12,
-        center: center,
-        mapTypeId: google.maps.MapTypeId.SATELLITE
-      };
-    map = new google.maps.Map(document.getElementById("map_canvas"),
-                                  myOptions);
-
-    var trails=  new google.maps.CartoDBLayer({
-      map_canvas: 'map_canvas',
-      map: map,
-      user_name:"outdoorshawaii",
-      table_name: 'trails',
-      query: "SELECT * FROM trails",
-      map_style: true,
-      infowindow: true,
-      auto_bound: true
-     });
-
-
-    /*
-var beaches =  new google.maps.CartoDBLayer({
-      map_canvas: 'map_canvas',
-      map: map,
-      user_name:"outdoorshawaii",
-      table_name: 'beaches',
-      query: "SELECT * FROM beaches",
-      map_style: true,
-      infowindow: true,
-      auto_bound: true
-     });
-    */
-
-    $('form').submit(function(ev){
-      ev.stopPropagation(); ev.preventDefault();
-      var value = $(this).find('input').val();
-      cartodb1_gmapsv3.update(value);
-    });
- }
-    
- function toggle(obj){
-      if (loc) loc.className='';
-      obj.className='selected';
-      loc=obj;
-      //get tab selected
-      var zoom = $("li").filter(".selected").text();
-
-      switch(zoom)
-      {
-
-      case "Oahu":
-        map.setZoom(10);
-        map.panTo(oahu);
-        break;
-      case "Kauai":
-        map.setZoom(10);
-        map.panTo(kauai);
-        break;
-      case "Molokai":
-        map.setZoom(10);
-        map.panTo(molokai);
-        break;
-      case "Lanai":
-        map.setZoom(10);
-        map.panTo(lanai);
-        break;
-      case "Maui":
-        map.setZoom(10);
-        map.panTo(maui);
-        break;
-      case "Big Island":
-        map.setZoom(8);
-        map.panTo(hawaii);
-        break;
-      case "All Islands":
-        map.setZoom(7);
-        map.panTo(center);
-        break;
-      }
-    }
-  </script>
 </head>
-<body onload="initialize()"
-    <div id="wrapper">
-      <div id="h">
-          <h4>Outdoors Hawaii</h4>
-          <ul id="locs">
-	    <li onclick="toggle(this)">All Islands</li>
-              <li onclick="toggle(this)">Kauai</li>
-              <li onclick="toggle(this)">Oahu</li>
-              <li onclick="toggle(this)">Molokai</li>
-              <li onclick="toggle(this)">Lanai</li>
-              <li onclick="toggle(this)">Maui</li>
-              <li onclick="toggle(this)">Big Island</li>
-          </ul>
-      </div>
-      <div id="sidebar">
-	<ul>
- <script type="text/javascript">
-   /* Use jQuery to get the json from cartodb, loop through each of the rows and output the names of hikes.*/ 
-	$.getJSON('http://outdoorshawaii.cartodb.com/api/v1/sql?callback=?',  //url
-	      { q: "SELECT * FROM trails" },                                  //the query to pass
-              function(result) {                                              // function to print out names.
-                 $.each(result.rows, function(i,val) {               
-                    $('#sidebar').append('<li>' + val.description + '</li>');
-                 })
-              });
-      </script>
-        </ul>
-      </div>
-      <div id="map_canvas"></div>
-      <div id="info"></div>
-    </div>
+
+<body>
+  <div id="map">
+  </div>
+    <!-- My file-->	
+  <script type="text/javascript" src="rbvea.js"></script>
 </body>
-</html>
