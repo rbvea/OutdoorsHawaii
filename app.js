@@ -3,6 +3,10 @@ var fs = require('fs');
 
 var app = express();
 
+app.configure('production', function() {
+    app.use(express.static(__dirname + '/public'));
+}); 
+
 app.get('/', function(req, res) {
     fs.readFile('index.html', function(err, data) {
         if(err) throw err;
