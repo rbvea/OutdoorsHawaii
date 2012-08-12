@@ -1,15 +1,32 @@
-var center = new L.LatLng(21.460737,-157.997818);
+var center =  new L.LatLng(21.460737,-157.997818);
+var found = false;
+var map;
 
-var SW = new L.LatLng(18.6567, -160.3949);
-var NE = new L.LatLng(22.5887, -156.6051);
+function success(position) {
+    map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+    map.setZoom(13);
+}
+
+function error() {
+    console.log('whoops, something happened');
+}
+
+
+if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(success, error);
+}
+
+
+var SW = new L.LatLng(21.25, -158.23);
+var NE = new L.LatLng(21.7, -157.65);
 
 var bounds = new L.LatLngBounds(SW, NE);
 
 var map = new L.Map('map', {
-    minZoom: 10,
+    minZoom: 8,
     center: center, 
-    zoom:   10 , 
-    maxBounds: bounds,
+    zoom:    10, 
+    //maxBounds: bounds,
 });
 
 var esriLayer = new L.TileLayer.ESRI("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer")
@@ -30,7 +47,9 @@ var parks = new lvector.AGS({
             weight: 1,
             color: "#111"
             }
-    }
+    },
+    popupTemplate: "<h3>{NAME}</h3><p>{DESCRIPT}</p>",
 });
+
 
 parks.setMap(map);
