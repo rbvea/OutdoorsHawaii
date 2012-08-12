@@ -5,8 +5,6 @@ var NE = new L.LatLng(22.5887, -156.6051);
 
 var bounds = new L.LatLngBounds(SW, NE);
 
-var tileLayer = new L.TileLayer(url);
-
 var map = new L.Map('map', {
     minZoom: 10,
     center: center, 
