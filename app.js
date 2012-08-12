@@ -12,4 +12,6 @@ app.get('/', function(req, res) {
     });
 });
 
-app.listen(1717);
+var port = process.env.PORT || 1717;
+
+app.listen(port);
