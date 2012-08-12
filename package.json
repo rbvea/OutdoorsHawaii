@@ -2,6 +2,7 @@
   "name": "outdoorshi",
   "version": "0.0.2",
   "dependencies": {
+      "express" : "0.3.x"
   },
   "engines": {
     "node": "0.6.x",
