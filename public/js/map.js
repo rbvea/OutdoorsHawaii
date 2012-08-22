@@ -60,8 +60,21 @@ var testGet = $.get(testUrl,
                             var park = parks.features[i];
                             //console.log(park);
                             L.marker([park.geometry.y,park.geometry.x])
-                                .bindPopup('<div class="park_popup"/><h3>' + park.attributes.NAME + '</h3><p>' + park.attributes.FULLADDR)
+                                //.bindPopup('<div class="park_popup"/><h3>' + park.attributes.NAME + '</h3><p>' + park.attributes.FULLADDR)
+                                // .bindPopup(popup)
+                                .on('click', function(e){
+                                  var marker = this;
+                                  var popup = marker.bindPopup('<div class="park_popup"/><h3>' + park.attributes.NAME + '</h3><p>' + park.attributes.FULLADDR);
+                                  marker.openPopup();
+                                  // console.log(popup._popup);
+                                  $(popup._popup._container).children('.leaflet-popup-close-button').click(function(){
+                                    // console.log(marker);
+                                    // should work ffs! marker.closePopup();
+                                    map.removeLayer(popup._popup);
+                                  });
+                                })
                                 .addTo(map);
+                            
                         }
                    });
 //var parks = $.parseJSON(testGet.responseText);
