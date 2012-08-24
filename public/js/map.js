@@ -15,6 +15,8 @@ function error() {
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error);
 } 
+
+
 var SW = new L.LatLng(21.25, -158.23);
 var NE = new L.LatLng(21.7, -157.65);
 
@@ -24,7 +26,6 @@ var map = new L.Map('map', {
     minZoom: 8,
     center: center, 
     zoom:    10, 
-    //maxBounds: bounds,
 });
 
 var esriLayer = new L.TileLayer.ESRI("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer")
@@ -33,6 +34,10 @@ map.addLayer(esriLayer);
 var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
 
 var parks;
+
+function parks($scope) {
+    
+}
 
 var testGet = $.get(testUrl, 
                     {
@@ -58,47 +63,19 @@ var testGet = $.get(testUrl,
                         var parks = $.parseJSON(data);
                         for(var i in parks.features) {
                             var park = parks.features[i];
-                            //console.log(park);
+                            
                             L.marker([park.geometry.y,park.geometry.x])
-                                //.bindPopup('<div class="park_popup"/><h3>' + park.attributes.NAME + '</h3><p>' + park.attributes.FULLADDR)
-                                // .bindPopup(popup)
+                            /*
                                 .on('click', function(e){
                                   var marker = this;
                                   var popup = marker.bindPopup('<div class="park_popup"/><h3>' + park.attributes.NAME + '</h3><p>' + park.attributes.FULLADDR);
                                   marker.openPopup();
-                                  // console.log(popup._popup);
-                                  $(popup._popup._container).children('.leaflet-popup-close-button').click(function(){
-                                    // console.log(marker);
-                                    // should work ffs! marker.closePopup();
+                                  $('.leaflet-popup-close-button').click(function(){
                                     map.removeLayer(popup._popup);
-                                  });
+                                  })
                                 })
+                                `*/
                                 .addTo(map);
                             
                         }
                    });
-//var parks = $.parseJSON(testGet.responseText);
-
-
-
-
-/*
-var parks = new lvector.AGS({
-    url: testUrl,
-    fields: '*',
-    scaleRange: [8, 13],
-    uniqueField: 'OBJECTID',
-    showAll: true,
-    symbology: {
-        type: "single",
-        vectorOptions: {
-            opacity: 0.8,
-            weight: 1,
-            color: "#111"
-           }
-    },
-    popupTemplate:'<div class="park_popup">popup</div>',
-});
-
-parks.setMap(map);
-*/
