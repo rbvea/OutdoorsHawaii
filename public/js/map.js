@@ -69,7 +69,7 @@ function error() {
           {
               where : '1=1',
               objectIds: null,
-              geometry: null
+              geometry: null,
               geometryType: 'esriGeometryEnvelope',
               inSR: "4326",
               spatialRel: 'esriSpatialRelIntersects',
