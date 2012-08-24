@@ -2,27 +2,48 @@
 <head>
     <title>Outdoors Hawaii</title>
 
-     <!-- Leaflet files -->
      <script type="text/javascript"  src="leaflet/leaflet.js"></script>
-     <script type="text/javascript"  src="js/angular-1.0.1.js"></script>
-    <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css"/>
-    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
-    <link rel="stylesheet" type="text/css" href="rbvea.css"/>
-    <!--script type="text/javascript" src="js/bootstrap.js"></script-->
-    <script type="text/javascript" src="js/TileLayer.ESRI.js"></script>
-    <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
+     <link rel="stylesheet" type="text/css" href="leaflet/leaflet.css"/>
 
+     <link rel="stylesheet" type="text/css" href="rbvea.css"/>
 
+     <script type="text/javascript" src="js/bootstrap.js"></script>
+     <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+     <link rel="stylesheet" type="text/css" href="css/bootstrap-responsive.min.css"/>
+
+     <script type="text/javascript" src="js/TileLayer.ESRI.js"></script>
+     <script type="text/javascript" src="js/jquery-1.8.0.min.js"></script>
 </head>
 
-<body ng-app>
+<body>
   <h1>Outdoors Hawaii</h1>
   <div class="fluid-container">
     <div class="row-fluid">
-      <div class="span3" id="sidebar" ng-controller="ParksCtrl">
-        <ul class="unstyled">
-          <li ng-repeat="park in parks">{{park.name}}</li>
-        </ul>
+      <div class="span3">
+        <div class="accordion" data-collapse-type="manual"
+             id="parks-sidebar">
+          <div class="accordion-group">
+            <div class="accordion-heading">             
+              <a class="accordion-toggle category" data-toggle="collapse"
+                 data-parent="#parent" href="#category1">Category 1
+              </a>
+            </div><!--/accordion-heading-->
+            <div id="category1" class="accordion-body collapse">
+              <ul class="accordion-inner unstyled">
+                <li id="" class="sidelink"><a href="">Open Link 1</a></li>
+                <li id="" class="sidelink"><a href="">Open Link 2</a></li>
+                <li id="" class="sidelink"><a href="">Open Link 3</a></li>
+              </ul>
+            </div><!--/category1-->
+          </div><!--/accordion-group-->
+          <div class="accordion-group">
+            <div class="accordion-heading">
+              <a class="accordion-toggle category" href="#Category2">Category
+                2</a>
+            </div><!--/accordion-heading-->
+          </div><!--/accordion-group-->
+        </div><!--/accordion-->
+
       </div>
       <div id="map" class="span9">
       </div>
