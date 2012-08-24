@@ -83,7 +83,7 @@ function error() {
               orderByFields: null,
               groupByFieldsForStatistics: null,
               outStatistics: null,
-                    f: 'json',
+              f: 'json',
               token: null,
           },function(data) {
               parksData = $.parseJSON(data);
@@ -91,8 +91,7 @@ function error() {
               for(var i in parksData.features) {
                   var park = parksData.features[i];
 
-                  $('#parks-sidebar').append('<div class="accordion-group"><div class="accordion-heading"><a class="accordion-toggle category" data-toggle="collapse" data-parent="#parks-sidebar" href="#' + name_short + '">' + park.attributes.NAME + '</a></div><div id="' \
-+ name_short + '" class="accordion-body collapse"><div class="accorion-inner">foo</div></div></div>');
+                  $('#parks-sidebar').append('<div class="accordion-group"><div class="accordion-heading"><a class="accordion-toggle category" data-toggle="collapse" data-parent="#parks-sidebar" href="#' + name_short + '">' + park.attributes.NAME + '</a></div><div id="' + name_short + '" class="accordion-body collapse"><div class="accorion-inner">foo</div></div></div>');
 
                   L.marker([park.geometry.y,park.geometry.x]).bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>")
                       .addTo(map);
