@@ -20,7 +20,12 @@ function init(parksData) {
     var $sidebar = "";
     $sidebar += '<ul class="unstyled">'
 
-    L.tileLayer('http://{s}.tile.cloudmade.com/02e10ae557e042ab9d012ef400178054/997/256/{z}/{x}/{y}.png').addTo(map);
+    L.tileLayer('http://{s}.tile.cloudmade.com/{key}/997/256/{z}/{x}/{y}.png', {
+        key: '02e10ae557e042ab9d012ef400178054',
+    }).addTo(map);
+    
+
+   $(map.getPanes().tilePane).css('z-index', -1);
 
     for(var i in parksData.features) {
         var park = parksData.features[i];
@@ -73,12 +78,11 @@ function success(position, $scope) {
               f: 'json',
               token: null,
           },function(data) {
-              /*
               initMap();
               init($.parseJSON(data));
               L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("You are here!").openPopup(); 
               map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-              map.setZoom(13);*/
+              map.setZoom(13);
           });
 }
 

@@ -14,6 +14,7 @@
 .leaflet-image-layer,
 .leaflet-layer { /* TODO optimize classes */
 	position: absolute;
+        z-index: 2;
 	}
 .leaflet-container {
 	overflow: hidden;
@@ -45,7 +46,7 @@
     max-width: 15000px !important;
     }
 
-.leaflet-tile-pane { z-index: 2; }
+.leaflet-tile-pane { z-index: -1 !important; }
 .leaflet-objects-pane { z-index: 3; }
 .leaflet-overlay-pane { z-index: 4; }
 .leaflet-shadow-pane { z-index: 5; }

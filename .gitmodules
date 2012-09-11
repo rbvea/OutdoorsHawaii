@@ -7,3 +7,6 @@
 [submodule "public/js/github/app-ui"]
 	path = public/js/github/app-ui
 	url = https://github.com/triceam/app-UI.git
+[submodule "public/js/github/esri2geo"]
+	path = public/js/github/esri2geo
+	url = https://github.com/calvinmetcalf/esri2geo.git
