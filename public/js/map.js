@@ -1,10 +1,6 @@
 var center =  new L.LatLng(21.460737,-157.997818);
 var map;
-var parksJSON;
 var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
-var parksData;
-var parks = [];
-
 
 function initMap() {
     var SW = new L.LatLng(21.25, -158.23);
@@ -12,14 +8,40 @@ function initMap() {
 
     var bounds = new L.LatLngBounds(SW, NE);
 
-    map = new L.Map('contentRoot', {
+    map = new L.Map('map', {
         minZoom: 8,
         center: center, 
         zoom:    10, 
     });
+}
 
-    var esriLayer = new L.TileLayer.ESRI("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer")
-    map.addLayer(esriLayer);
+
+function init(parksData) {
+    var $sidebar = "";
+    $sidebar += '<ul class="unstyled">'
+
+    L.tileLayer('http://{s}.tile.cloudmade.com/02e10ae557e042ab9d012ef400178054/997/256/{z}/{x}/{y}.png').addTo(map);
+
+    for(var i in parksData.features) {
+        var park = parksData.features[i];
+        
+        $sidebar += '<li onclick="get_park('+park.attributes.OBJECTID+')">'+park.attributes.NAME+ '</li>';
+
+        L.marker([park.geometry.y,park.geometry.x])
+            .bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>")
+            .addTo(map);
+    }
+    $sidebar += '</ul>';
+    window.splitViewNavigator.pushSidebarView({
+        title: 'Outdoors Hawaii',
+        backLabel: null,
+        view : $($sidebar)
+    });
+
+
+/*
+    var esriLayer = new L.TileLayer.ESRI("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer", {zIndex: 0});
+    map.addLayer(esriLayer, true);*/
 }
 
 function success(position, $scope) {
@@ -51,34 +73,13 @@ function success(position, $scope) {
               f: 'json',
               token: null,
           },function(data) {
-              var $sidebar = "";
+              /*
               initMap();
-              
-              parksData = $.parseJSON(data);
-              
-              $sidebar += '<ul class="unstyled">'
-              for(var i in parksData.features) {
-                  var park = parksData.features[i];
-                  
-                  $sidebar += '<li onclick="get_park('+park.attributes.OBJECTID+')">'+park.attributes.NAME+ '</li>';
-
-                  L.marker([park.geometry.y,park.geometry.x])
-                      .bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>")
-                      .addTo(map);
-              }
-              $sidebar += '</ul>';
-              
-              window.splitViewNavigator.pushSidebarView({
-                  title: 'Outdoors Hawaii',
-                  backLabel: null,
-                  view : $($sidebar)
-                  
-              });
-              L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("You are here!").openPopup(); map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
-              map.setZoom(13);
+              init($.parseJSON(data));
+              L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("You are here!").openPopup(); 
+              map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
+              map.setZoom(13);*/
           });
-
-
 }
 
 function error() {
@@ -104,24 +105,16 @@ function error() {
               f: 'json',
               token: null,
           },function(data) {
-              parksData = $.parseJSON(data);
-
-              for(var i in parksData.features) {
-                  var park = parksData.features[i];
-                  
-                  $('#parks-sidebar').append('<div class="accordion-group"><div class="accordion-heading"><a class="accordion-toggle category" data-toggle="collapse" data-parent="#parks-sidebar" href="#' + name_short + '">' + park.attributes.NAME + '</a></div><div id="' + name_short + '" class="accordion-body collapse"><div class="accorion-inner">foo</div></div></div>');
-
-                  L.marker([park.geometry.y,park.geometry.x]).bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>")
-                      .addTo(map);
-              }
-
+              initMap();
+              init($.parseJSON(data));
           });
 }
 
 if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(success, error);
-} 
-
+} else {
+    error();
+}
 
 $(document).ready(function () {
     new SplitViewNavigator('body', "Menu");
@@ -132,6 +125,6 @@ $(document).ready(function () {
     window.splitViewNavigator.pushBodyView({
         title: 'Outdoors Hawaii', 
         backLabel: null,
-        view: '<div class="loading" style="margin-left: 5px;"></div>',
+        view: '<div id="map"></div>',
     });
 });
