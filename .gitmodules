@@ -1,0 +1,9 @@
+[submodule "public/js/github/jQuery-Animate-Enhanced"]
+	path = public/js/github/jQuery-Animate-Enhanced
+	url = https://github.com/benbarnett/jQuery-Animate-Enhanced.git
+[submodule "public/js/github/iscroll"]
+	path = public/js/github/iscroll
+	url = https://github.com/cubiq/iscroll.git
+[submodule "public/js/github/app-ui"]
+	path = public/js/github/app-ui
+	url = https://github.com/triceam/app-UI.git
