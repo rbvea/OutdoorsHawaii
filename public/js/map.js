@@ -124,7 +124,7 @@ function success(position, $scope) {
           {
               where : '1=1',
               objectIds: null,
-              geometry: geo; 
+              geometry: geo,
               geometryType: 'esriGeometryEnvelope',
               inSR: "4326",
               spatialRel: 'esriSpatialRelIntersects',
