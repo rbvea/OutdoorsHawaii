@@ -315,6 +315,7 @@
 	transform: rotate(45deg);
 	}
 .leaflet-container a.leaflet-popup-close-button {
+  z-index: 8;
 	position: absolute;
 	top: 0;
 	right: 0;
