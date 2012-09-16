@@ -3,7 +3,6 @@ var center =  new L.LatLng(21.460737,-157.997818);
 var map;
 var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
 var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/2/query';
-var park;
 var parks = [];
 var feature_attributes = ['ADACOMPLY', 'BASKETBALL','BUSSTOP','COMGARDEN','EXERCISEFLD','FOOTBALL','HIKING','LIGHTING','OUTCANOE','PLAYGROUND','RESTROOM','SHOWER','SOCCER','TENNIS','BASEBALL','BOATING','CAMPING','DRINKWATER','FISHING','GOLFING','JOGGING','MTBCYCLE','PICNIC','RECVEHICLE','SHADETREE','SKATEBOARD','SWIMMING','VOLLEYBALL'];
 
@@ -22,7 +21,6 @@ function initMap() {
 }
 
 function getInfo(id, name) {
-
     $.get(infoUrl, 
           {
               where : 'FACILITYID=' + id,
@@ -36,15 +34,19 @@ function getInfo(id, name) {
               f: 'json',
               token: null,
           },function(data) {
-              var sidebarview = "<h4>FEATURES</h4>";
+              var sidebarview = '<h4>FEATURES</h4>';
+              sidebarview += '<ul id="parks-sidebar">';
+              
               var info = $.parseJSON(data);
               for(i in feature_attributes) {
                   if(info.features[0].attributes[feature_attributes[i]] == "Yes") {
-                      sidebarview += '<div class="feature-pic-block">';
+                      sidebarview += '<li>';
                       sidebarview += '<img class="feature-pic" src="/img/icons/' + feature_attributes[i] + '.svg"/>'; 
-                      sidebarview += '</div>';
+                      sidebarview += feature_attributes[i].toLowerCase();
+                      sidebarview += '</li>';
                   }
               }
+              sidebarview += '</ul>';
               pushSidebarView({
                   title: name,
                   backLabel: null, 
@@ -63,18 +65,25 @@ function pushSidebarView(view) {
 }
 
 function openPopup(id) {
-
     for(i in parks) {
-        if(parks[i].id = id) {
-            park = parks[i];
+        if(parks[i].id == id) {
+            var park = parks[i];
+            break;
         }
     }
 
-    park.attr.marker.openPopup();
-    getInfo(park.attr.fid);
+    var marker = parks[i].attr.marker;
+            
+    if(! marker.hasOwnProperty('_map')) {
+        marker.addTo(map);
+        park.attr.marker_id = marker._leaflet_id;
+    }
+    marker.openPopup();
+    console.log(park.id);
+    getInfo(park.id, park.attr.name);
 }
 
-function init(parksData) {
+function init(parksData, placeMarkers) {
     var $sidebar = "";
     $sidebar += '<ul id="parks-sidebar">'
 
@@ -87,24 +96,27 @@ function init(parksData) {
 
     for(var i in parksData.features) {
         var park = parksData.features[i];
+
+        var marker = new L.marker([park.geometry.y,park.geometry.x])
+            .bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>");
         
+        if (placeMarkers) { 
+            marker.addTo(map);
+        }
 
-        var marker = L.marker([park.geometry.y,park.geometry.x])
-            .bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>")
-            .addTo(map);
-
-        $sidebar += '<li onclick="openPopup('+marker._leaflet_id+');">'+park.attributes.NAME+ '</li>';
 
         var thispark = 
             {
-                id: marker._leaflet_id,
+                id: park.attributes.FACILITYID,
                 attr: 
                 {
                     name: park.attributes.NAME,
-                    fid: park.attributes.FACILITYID,
+                    marker_id: marker._leaflet_id,
                     marker: marker,
                 },
             };
+
+        $sidebar += '<li onclick="openPopup('+thispark.id+');">'+thispark.attr.name+ '</li>';
         parks.push(thispark);
     
         marker.on("click", function () {
@@ -112,17 +124,21 @@ function init(parksData) {
             var park;
 
             for(i in parks) {
-                if(parks[i].id == this._leaflet_id) {
+                if(parks[i].attr.marker_id == this._leaflet_id) {
                     park = parks[i];
+                    break;
                 }
             }
-            getInfo(park.attr.fid, park.attr.name);
-       });
-        
-        map.on('popupclose', function () { 
-            window.splitViewNavigator.popSidebarView();
+            if(park != null) {
+                getInfo(park.id, park.attr.name);
+            }
         });
+        
     }
+    map.on('popupclose', function () { 
+        window.splitViewNavigator.popSidebarView();
+    });
+
     $sidebar += '</ul>';
     
     window.splitViewNavigator.replaceSidebarView({
@@ -164,7 +180,7 @@ function success(position, $scope) {
               token: null,
           },function(data) {
               initMap();
-              init($.parseJSON(data));
+              init($.parseJSON(data), false);
               //L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("You are here!").openPopup(); 
               map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
               map.setZoom(13);
@@ -194,7 +210,7 @@ function error() {
               token: null,
           },function(data) {
               initMap();
-              init($.parseJSON(data));
+              init($.parseJSON(data), false);
           });
 }
 
