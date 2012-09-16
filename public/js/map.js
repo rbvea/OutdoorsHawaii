@@ -3,7 +3,10 @@ var center =  new L.LatLng(21.460737,-157.997818);
 var map;
 var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
 var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/2/query';
+var park;
 var parks = [];
+var feature_attributes = ['ADACOMPLY', 'BASKETBALL','BUSSTOP','COMGARDEN','EXERCISEFLD','FOOTBALL','HIKING','LIGHTING','OUTCANOE','PLAYGROUND','RESTROOM','SHOWER','SOCCER','TENNIS','BASEBALL','BOATING','CAMPING','DRINKWATER','FISHING','GOLFING','JOGGING','MTBCYCLE','PICNIC','RECVEHICLE','SHADETREE','SKATEBOARD','SWIMMING','VOLLEYBALL'];
+
 
 function initMap() {
     var SW = new L.LatLng(21.25, -158.23);
@@ -18,7 +21,7 @@ function initMap() {
     });
 }
 
-function getInfo(id) {
+function getInfo(id, name) {
 
     $.get(infoUrl, 
           {
@@ -33,20 +36,25 @@ function getInfo(id) {
               f: 'json',
               token: null,
           },function(data) {
-              var sidebarview = "<h1>FEATURES</h1>";
+              var sidebarview = "<h4>FEATURES</h4>";
               var info = $.parseJSON(data);
-              for(feature in info.features[0].attributes) {
-                  if(info.features[0].attributes[feature] == "Yes") {
-                      console.log(feature);
-                      sidebarview +=  "<p>" + feature + "</p>";
+              for(i in feature_attributes) {
+                  if(info.features[0].attributes[feature_attributes[i]] == "Yes") {
+                      sidebarview += '<div class="feature-pic-block">';
+                      sidebarview += '<img class="feature-pic" src="/img/icons/' + feature_attributes[i] + '.svg"/>'; 
+                      sidebarview += '</div>';
                   }
               }
               pushSidebarView({
-                  title: 'Insert name here',
-                  backLabel: 'Back to parks',
+                  title: name,
+                  backLabel: null, 
                   view: $(sidebarview),
               });
           });
+}
+
+function filterFields(field) {
+    
 }
 
 
@@ -54,30 +62,45 @@ function pushSidebarView(view) {
     window.splitViewNavigator.pushSidebarView(view);
 }
 
+function openPopup(id) {
+
+    for(i in parks) {
+        if(parks[i].id = id) {
+            park = parks[i];
+        }
+    }
+
+    park.attr.marker.openPopup();
+    getInfo(park.attr.fid);
+}
+
 function init(parksData) {
     var $sidebar = "";
-    $sidebar += '<ul class="unstyled">'
+    $sidebar += '<ul id="parks-sidebar">'
 
+/*
     L.tileLayer('http://{s}.tile.cloudmade.com/{key}/997/256/{z}/{x}/{y}.png', {
         key: '02e10ae557e042ab9d012ef400178054',
-    }).addTo(map);
+    }).addTo(map);*/
     
    $(map.getPanes().tilePane).css('z-index', -1);
 
     for(var i in parksData.features) {
         var park = parksData.features[i];
         
-        $sidebar += '<li>'+park.attributes.NAME+ '</li>';
 
         var marker = L.marker([park.geometry.y,park.geometry.x])
             .bindPopup("<h3>" + park.attributes.NAME + "</h3><p>" + park.attributes.FULLADDR + "</p>")
             .addTo(map);
+
+        $sidebar += '<li onclick="openPopup('+marker._leaflet_id+');">'+park.attributes.NAME+ '</li>';
 
         var thispark = 
             {
                 id: marker._leaflet_id,
                 attr: 
                 {
+                    name: park.attributes.NAME,
                     fid: park.attributes.FACILITYID,
                     marker: marker,
                 },
@@ -93,7 +116,7 @@ function init(parksData) {
                     park = parks[i];
                 }
             }
-            getInfo(park.attr.fid);
+            getInfo(park.attr.fid, park.attr.name);
        });
         
         map.on('popupclose', function () { 
@@ -102,14 +125,13 @@ function init(parksData) {
     }
     $sidebar += '</ul>';
     
-    window.splitViewNavigator.pushSidebarView({
+    window.splitViewNavigator.replaceSidebarView({
         title: 'Outdoors Hawaii',
         backLabel: null,
         view : $($sidebar),
     });
-/*
     var esriLayer = new L.TileLayer.ESRI("http://services.arcgisonline.com/ArcGIS/rest/services/NatGeo_World_Map/MapServer", {zIndex: 0});
-    map.addLayer(esriLayer, true);*/
+    map.addLayer(esriLayer, true);
 }
 
 function success(position, $scope) {
@@ -150,7 +172,6 @@ function success(position, $scope) {
 }
 
 function error() {
-
     $.get(testUrl,
           {
               where : '1=1',
