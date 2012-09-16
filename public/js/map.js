@@ -115,7 +115,7 @@ function init(parksData) {
 function success(position, $scope) {
     var bounds = 0.02;
 
-    var geo = "" + (position.coords.longitude - bounds) + ",";
+    var geo = position.coords.longitude - bounds + ",";
     geo +=  position.coords.latitude - bounds + ",";
     geo +=  position.coords.longitude + bounds + ",";
     geo +=  position.coords.latitude + bounds;
@@ -124,7 +124,7 @@ function success(position, $scope) {
           {
               where : '1=1',
               objectIds: null,
-              geometry: null, 
+              geometry: geo,
               geometryType: 'esriGeometryEnvelope',
               inSR: "4326",
               spatialRel: 'esriSpatialRelIntersects',

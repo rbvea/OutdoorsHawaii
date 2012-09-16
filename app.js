@@ -1,5 +1,6 @@
 var express = require('express');
 var fs = require('fs');
+var Firebase = require('./firebase-node');
 
 var app = express();
 
@@ -22,4 +23,3 @@ var port = process.env.PORT || 1717;
 app.listen(port, function() {
     console.log('listening on port: ' +  port)
 });
-
