@@ -1,10 +1,12 @@
 //var Firebase = new Firebase('http://gamma.firebase.com/rbvea/');
+var instagram_client_id = 'ef90dd863b314199bbb6f5a768164a57';
 var center =  new L.LatLng(21.460737,-157.997818);
 var map;
 var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
 var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/2/query';
 var parks = [];
 var feature_attributes = ['ADACOMPLY', 'BASKETBALL','BUSSTOP','COMGARDEN','EXERCISEFLD','FOOTBALL','HIKING','LIGHTING','OUTCANOE','PLAYGROUND','RESTROOM','SHOWER','SOCCER','TENNIS','BASEBALL','BOATING','CAMPING','DRINKWATER','FISHING','GOLFING','JOGGING','MTBCYCLE','PICNIC','RECVEHICLE','SHADETREE','SKATEBOARD','SWIMMING','VOLLEYBALL'];
+var sidebarview;
 
 
 function initMap() {
@@ -20,39 +22,22 @@ function initMap() {
     });
 }
 
-function getInfo(id, name) {
-    $.get(infoUrl, 
-          {
-              where : 'FACILITYID=' + id,
-              objectIds: null,
-              outFields: '*',
-              returnIdsOnly: false,
-              returnCountOnly: false,
-              orderByFields: null,
-              groupByFieldsForStatistics: null,
-              outStatistics: null,
-              f: 'json',
-              token: null,
-          },function(data) {
-              var sidebarview = '<h4>FEATURES</h4>';
-              sidebarview += '<ul id="parks-sidebar">';
-              
-              var info = $.parseJSON(data);
-              for(i in feature_attributes) {
-                  if(info.features[0].attributes[feature_attributes[i]] == "Yes") {
-                      sidebarview += '<li>';
-                      sidebarview += '<img class="feature-pic" src="/img/icons/' + feature_attributes[i] + '.svg"/>'; 
-                      sidebarview += feature_attributes[i].toLowerCase();
-                      sidebarview += '</li>';
+function fetchInstagram(latlng) {
+
+    var instagram_search = {
+        lat: latlng.lat, 
+        lng: latlng.lng, 
+        distance: 10,
+        client_id: instagram_client_id,
+    };
+
+    $.getJSON('https://api.instagram.com/v1/locations/search?callback=?', instagram_search,
+              function(data) {
+                  for(site in data.data) {
+                      console.log(site.id);
                   }
-              }
-              sidebarview += '</ul>';
-              pushSidebarView({
-                  title: name,
-                  backLabel: null, 
-                  view: $(sidebarview),
               });
-          });
+    return null;
 }
 
 function filterFields(field) {
@@ -64,7 +49,7 @@ function pushSidebarView(view) {
     window.splitViewNavigator.pushSidebarView(view);
 }
 
-function openPopup(id) {
+function openPopup(id, name) {
     for(i in parks) {
         if(parks[i].id == id) {
             var park = parks[i];
@@ -79,8 +64,40 @@ function openPopup(id) {
         park.attr.marker_id = marker._leaflet_id;
     }
     marker.openPopup();
-    console.log(park.id);
-    getInfo(park.id, park.attr.name);
+
+    $.get(infoUrl, 
+          {
+              where : 'FACILITYID=' + id,
+              objectIds: null,
+              outFields: '*',
+              returnIdsOnly: false,
+              returnCountOnly: false,
+              orderByFields: null,
+              groupByFieldsForStatistics: null,
+              outStatistics: null,
+              f: 'json',
+              token: null,
+         }, function(data) {
+
+             var info = $.parseJSON(data);
+             var sv = '<button id="instagram_button" onclick="fetchInstagram(marker._latlng.lat, marker._latlng.lng)">Instagram</button>';
+             sv += '<ul id="parks-sidebar">';
+             
+             for(i in feature_attributes) {
+                 if(info.features[0] != null && info.features[0].attributes[feature_attributes[i]] == "Yes") {
+                     sv += '<li>';
+                     sv += '<img class="feature-pic" src="/img/icons/' + feature_attributes[i] + '.svg"/>'; 
+                     sv += feature_attributes[i].toLowerCase();
+                     sv += '</li>';
+                 }
+             }
+             sv += '</ul>';
+             pushSidebarView({
+                 title: 'Features', 
+                 backLabel: '<-', 
+                 view: sv, 
+             });
+         });
 }
 
 function init(parksData, placeMarkers) {
@@ -130,10 +147,9 @@ function init(parksData, placeMarkers) {
                 }
             }
             if(park != null) {
-                getInfo(park.id, park.attr.name);
+                openPopup(park.id, park.attr.name);
             }
         });
-        
     }
     map.on('popupclose', function () { 
         window.splitViewNavigator.popSidebarView();
@@ -180,7 +196,7 @@ function success(position, $scope) {
               token: null,
           },function(data) {
               initMap();
-              init($.parseJSON(data), false);
+              init($.parseJSON(data), true);
               //L.marker([position.coords.latitude, position.coords.longitude]).addTo(map).bindPopup("You are here!").openPopup(); 
               map.panTo(new L.LatLng(position.coords.latitude, position.coords.longitude));
               map.setZoom(13);
@@ -223,7 +239,7 @@ if (navigator.geolocation) {
 $(document).ready(function () {
     new SplitViewNavigator('body', "Menu");
     window.splitViewNavigator.pushSidebarView({
-        title: 'Parks',
+        title: "",
         backLabel: null,
         view: '<h3>Loading...</h3>'
     });

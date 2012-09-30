@@ -32,3 +32,11 @@ h4 {
 .viewNavigator_header_title {
     max-width: 75%;
 }
+
+#instagram_button {
+    background: rgb(130, 224, 122);
+    border-radius: 2px;
+    border: 1px solid #bababa;
+    padding:  6px;
+    margin: 10px;
+}

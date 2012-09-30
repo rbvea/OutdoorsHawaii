@@ -1,6 +1,7 @@
 var express = require('express');
 var fs = require('fs');
 var Firebase = require('./firebase-node');
+var oauth = require('oauth');
 
 var app = express();
 
@@ -16,6 +17,10 @@ app.get('/', function(req, res) {
         if(err) throw err;
        	res.end(data); 
     });
+});
+
+app.get('/verify', function(req, res) {
+    console.log(req);
 });
 
 var port = process.env.PORT || 1717;
