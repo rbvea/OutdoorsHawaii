@@ -40,3 +40,15 @@ h4 {
     padding:  6px;
     margin: 10px;
 }
+
+.viewNavigator_header {
+	background: rgb(130,224,122); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(130,223,122,1) 0%, rgba(36,119,28,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(130,223,122,1)), color-stop(100%,rgba(36,119,28,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7cfdf', endColorstr='#23538a',GradientType=0 ); /* IE6-9 */
+}
+
