@@ -1,0 +1,26 @@
+doctype 5
+html(ng-app="outhi")
+  head
+    title= title
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.min.js')
+    script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js')
+
+    script(src='/leaflet/leaflet.js')
+    link(rel='stylesheet', href='/leaflet/leaflet.css')
+
+    script(type='text/javascript' , src='/javascripts/app-ui/src/splitviewnavigator/splitviewnavigator.js')
+    link(rel='stylesheet', type='text/css',  href='/javascripts/app-ui/src/splitviewnavigator/splitviewnavigator.css')
+
+    script(src='/javascripts/app-ui/src/viewnavigator/viewnavigator.js')
+    link(rel='stylesheet', type='text/css' , href='/javascripts/app-ui/src/viewnavigator/viewnavigator.css')
+    link(rel='stylesheet', type='text/css' , href='/stylesheets/outdoorshi.css')
+
+    script(src='/javascripts/app-ui/src/libs/noClickDelay.js')
+    script(src='/javascripts/app-ui/src/libs/jquery.animate-enhanced.js')
+    script(src='/javascripts/app-ui/src/libs/iscroll.js')
+
+    script(src='/javascripts/TileLayer.ESRI.js')
+    script(src='/javascripts/controllers.js')
+
+  body
+    block content

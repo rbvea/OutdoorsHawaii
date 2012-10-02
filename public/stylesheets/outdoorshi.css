@@ -1,0 +1,53 @@
+body, html { width: 100%; height: 100%}
+
+body {
+    font-family: sans-serif; 
+}
+
+h4 { 
+    margin-left: 10px;
+}
+
+#parks-sidebar {
+    margin-left: -40px;
+    list-style-type: none;
+    line-height: 48px;
+    width: 100%;
+    border-top: 1px solid #bababa;
+    margin-top: 0px;
+}
+
+#parks-sidebar li {
+    font-size: 14px;
+    border-bottom: 1px solid #bababa;
+    padding: 0 5px;
+}
+
+.feature-pic{
+    float: left;
+    width: 19px;
+    margin: 14px 5px 0px;
+}
+
+.viewNavigator_header_title {
+    max-width: 75%;
+}
+
+#instagram_button {
+    background: rgb(130, 224, 122);
+    border-radius: 2px;
+    border: 1px solid #bababa;
+    padding:  6px;
+    margin: 10px;
+}
+
+.viewNavigator_header {
+	background: rgb(130,224,122); /* Old browsers */
+	background: -moz-linear-gradient(top, rgba(130,223,122,1) 0%, rgba(36,119,28,1) 100%); /* FF3.6+ */
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,rgba(130,223,122,1)), color-stop(100%,rgba(36,119,28,1))); /* Chrome,Safari4+ */
+	background: -webkit-linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* Chrome10+,Safari5.1+ */
+	background: -o-linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* Opera 11.10+ */
+	background: -ms-linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* IE10+ */
+	background: linear-gradient(top, rgba(130,223,122,1) 0%,rgba(36,119,28,1) 100%); /* W3C */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a7cfdf', endColorstr='#23538a',GradientType=0 ); /* IE6-9 */
+}

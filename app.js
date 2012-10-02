@@ -1,30 +1,36 @@
-var express = require('express');
-var fs = require('fs');
-var Firebase = require('./firebase-node');
-var oauth = require('oauth');
+
+/**
+ * Module dependencies.
+ */
+
+var express = require('express')
+  , routes = require('./routes')
+  , http = require('http')
+  , path = require('path');
 
 var app = express();
 
-app.use(express.static(__dirname + '/public'));
-
-app.configure('production', function() {
-    app.engine('jade', require('jade').__express);
-    app.use(express.static(__dirname + '/public'));
-}); 
-
-app.get('/', function(req, res) {
-    fs.readFile('index.html', function(err, data) {
-        if(err) throw err;
-       	res.end(data); 
-    });
+app.configure(function(){
+  app.set('port', process.env.PORT || 1717);
+  app.set('views', __dirname + '/views');
+  app.set('view engine', 'jade');
+  app.use(express.favicon());
+  app.use(express.logger('dev'));
+  app.use(express.bodyParser());
+  app.use(express.methodOverride());
+  app.use(app.router);
+  app.use(express.static(path.join(__dirname, 'public')));
 });
 
-app.get('/verify', function(req, res) {
-    console.log(req);
+app.configure('development', function(){
+  app.use(express.errorHandler());
 });
 
-var port = process.env.PORT || 1717;
+app.get('/', routes.index);
 
-app.listen(port, function() {
-    console.log('listening on port: ' +  port)
+app.get('/landing', routes.landing);
+app.get('/parks/init', routes.init);
+
+http.createServer(app).listen(app.get('port'), function(){
+  console.log("Express server listening on port " + app.get('port'));
 });
