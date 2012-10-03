@@ -8,28 +8,34 @@ h4 {
     margin-left: 10px;
 }
 
-#parks-sidebar {
-    margin-left: -40px;
+#parks-nav {
+    padding-left: 5px; 
     list-style-type: none;
     line-height: 48px;
-    width: 100%;
-    border-top: 1px solid #bababa;
-    margin-top: 0px;
+    margin-top: 40px;
+    overflow: scroll;
+    --webkit-overflow-scrolling: touch;
+    position: absolute;
+}
+
+#parks-nav dd{
+    font-size: 14px;
+    border-bottom: 1px solid #777;
+    background: #BBB;
+    color: rgb(243, 243, 243);
+}
+
+#parks-nav a {
+    color: #FAFAFA;
 }
 
 #header {
     border-bottom: 1px solid #777;
+    background: #00B73B;
 }
 
-
-#features-sidebar ul {
-    list-style-type: none;
-}
-
-#features-sidebar li {
-    font-size: 14px;
-    border-bottom: 1px solid #bababa;
-    padding: 0 5px;
+#header h1{
+    color: #FAFAFA; 
 }
 
 .feature-pic {
@@ -37,14 +43,10 @@ h4 {
     margin: 14px 5px 0px;
 }
 
-.viewNavigator_header_title {
-    max-width: 75%;
+.nav-bar {
+    background: #00B73B;
 }
 
-#instagram_button {
-    background: rgb(130, 224, 122);
-    border-radius: 2px;
-    border: 1px solid #bababa;
-    padding:  6px;
-    margin: 10px;
+.row {
+    width: 100%;
 }

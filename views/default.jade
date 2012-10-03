@@ -7,24 +7,18 @@ html
     script(src='/leaflet/leaflet.js')
     link(rel='stylesheet', href='/leaflet/leaflet.css')
 
-    script(type='text/javascript' , src='/javascripts/app-ui/src/splitviewnavigator/splitviewnavigator.js')
-    link(rel='stylesheet', type='text/css',  href='/javascripts/app-ui/src/splitviewnavigator/splitviewnavigator.css')
-
-    script(src='/javascripts/app-ui/src/viewnavigator/viewnavigator.js')
-    link(rel='stylesheet', type='text/css' , href='/javascripts/app-ui/src/viewnavigator/viewnavigator.css')
-    link(rel='stylesheet', type='text/css' , href='/stylesheets/outdoorshi.css')
-
-    script(src='/javascripts/app-ui/src/libs/noClickDelay.js')
-    script(src='/javascripts/app-ui/src/libs/jquery.animate-enhanced.js')
-    script(src='/javascripts/app-ui/src/libs/iscroll.js')
-
     script(src='/javascripts/TileLayer.ESRI.js')
     script(src='/javascripts/controllers.js')
 
     link(rel='stylesheet', type='text/css',  href='/stylesheets/foundation.css')
-    script(src='/javascripts/foundation.js')
+    script(type='text/javascript', src='/javascripts/jquery.foundation.navigation.js')
+    script(type='text/javascript', src='/javascripts/jquery.foundation.tabs.js')
+    script(type='text/javascript', src='/javascripts/modernizr.foundation.js')
+
+    link(rel='stylesheet', type='text/css' , href='/stylesheets/outdoorshi.css')
 
   body(ng-app)
     block content
+    script(src='/javascripts/init.js')
     script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js')
       
