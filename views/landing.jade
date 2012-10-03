@@ -1,6 +1,3 @@
 #container
-  h1 Welcome to Outdoors Hawaii!
-  p Select which activies you'd like to do and we'll find the nearest park!
-  ul#park_options
-    li(ng-repeat="option in options")
-      {{option.name}}
+  ul(ng-controller="optionsCtrl")
+    li(ng-repeat="option in opts") {{option.name}}

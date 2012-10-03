@@ -1,4 +1,18 @@
 extends default 
 
 block content
-  script(type="text/javascript", src="javascripts/init.js")
+  #container
+    .row
+      .twelve.columns#header
+        h1 Outdoors Hawaii
+    .row
+      #features-sidebar.three.columns
+        ul(ng-controller="optionsCtrl")
+          li(ng-repeat="option in opts", class="{{option.value}}") 
+            img.feature-pic(src="/images/icons/{{option.key}}.svg")
+            {{option.name}}
+      #body.nine.columns
+        h3 Welcome to Outdoors Hawaii
+        p 
+        | We automatically found the parks within 20 miles of your current location.
+        | Use the sidebar to customize which sport or feature you'd like at your park.
