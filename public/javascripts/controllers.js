@@ -12,8 +12,7 @@ function parksCtrl($scope, $http) {
 
 function optionsCtrl($scope, $http) {
     $http.get('/json/attributes.json').success( function(data) {
-        console.log(data);
-        $scope.opts = data;
+        $scope.opts = data.features;
     });
 }
 

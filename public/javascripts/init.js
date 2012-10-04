@@ -1,4 +1,3 @@
 $(document).ready(function($http) {
-    $('#parks-nav').foundationNavigation();
+    //var scrolly = new iScroll('parks-nav');
 });
-

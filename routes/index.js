@@ -14,9 +14,7 @@ var options = {
 };
    
 exports.init = function(req, res) {
-    console.log(req);
-    res.json([{"name": "Kunia", "address": "123 Fake St"},
-              {"name": "Waipahu","address": '3435 asldkfj'}]);
+
 }
 
 exports.landing = function(req, res) {
