@@ -12,6 +12,10 @@ h4 {
     padding: 0px;
 }
 
+#parkTab {
+    margin-top : 100px;
+}
+
 #parks-nav , #options-nav {
     position: relative; 
     list-style-type: none;
