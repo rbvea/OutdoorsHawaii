@@ -14,6 +14,8 @@ function optionsCtrl($scope, $http) {
     $http.get('/json/attributes.json').success( function(data) {
         $scope.opts = data.features;
     });
+
+    $scope.current_tab = 'options'; 
 }
 
 function pushBody(view) {

@@ -6,20 +6,21 @@ block content
       .twelve.columns#header
         h1 Outdoors Hawaii
     .row
-      #sidebar.three.columns
+      #sidebar.three.columns(ng-controller="optionsCtrl")
+        {{current_tab}}
         dl.tabs#tabs
-          dd.active
-            a(href="#options") Filter
-          dd
-            a(href="#parks") Parks
+          dd(class="{{{true: 'active', false: ''}[current_tab == 'options']}}" , ng-click="current_tab = 1) 
+            a(href="#") Filter
+          dd(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-click="current_tab = 2) 
+            a(href="#") Parks
         ul.tabs-content
-          li.active#optionsTab
-            dl#options-nav.side-nav.nav-bar.vertical(ng-controller="optionsCtrl")
+          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}")
+            dl#options-nav.side-nav.nav-bar.vertical
               dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
-                img.feature-pic(src="/images/icons/{{option.key}}.svg")
+                img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
                 {{option.name}}
           li#parksTab
-            Insert parks here
+          |  Insert parks here
       #body.nine.columns
         h3 Welcome to Outdoors Hawaii
         p 
