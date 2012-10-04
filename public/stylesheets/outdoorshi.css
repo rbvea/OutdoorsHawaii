@@ -8,8 +8,8 @@ h4 {
 }
 
 #sidebar {
-    position: absolute; 
-    width: 178px;
+    position: absolute;  
+    padding: 0px;
 }
 
 #parks-nav , #options-nav {
@@ -17,16 +17,24 @@ h4 {
     list-style-type: none;
     line-height: 48px;
     margin-top: 89px;
-    --webkit-overflow-scrolling: touch;
     width: 100%;
     height: 800px;
     overflow: scroll;
+    -webkit-overflow-scrolling: touch;
 }
+
+ul.tabs-content {
+    margin-top: -89px;
+}
+
 .tabs-content dd{
     font-size: 14px;
     border-bottom: 1px solid #777;
-    background: #BBB;
-    color: rgb(243, 243, 243);
+    background: #FAFAFA; 
+}
+
+.tabs-content dd.active {
+    background: #00B73B;
 }
 
 .tabs-content a {
@@ -48,7 +56,7 @@ h4 {
 }
 
 .nav-bar {
-    background: #00B73B;
+    background: #FAFAFA; 
 }
 
 .row {
