@@ -70,3 +70,16 @@ ul.tabs-content {
 #tabs {
     width: 100%;
 }
+
+#content {
+    height: 100%;
+}
+
+#map {
+    position: relative;
+    width: 75%;
+}
+
+#container {
+    height: 100%;
+}

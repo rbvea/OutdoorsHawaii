@@ -1,3 +1,6 @@
+
+
+
 var http = require('http');
 /*
  * GET home page.
@@ -7,16 +10,13 @@ exports.index = function(req, res){
 };
 
 
-var parksUrl= 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
+var parksUrl= 'http://services.arcgis.com/';
 
 var options = {
-    host: 'services.arcgis.com'
+    host: 'services.arcgis.com',
+    //path: 'tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query?where=1%3D1&geometryType=esriGeometryEnvelope&returnIdsOnly=false&returnCountOnly=false&f=json'
 };
    
-exports.init = function(req, res) {
-
-}
-
 exports.landing = function(req, res) {
     res.render('landing');
 };

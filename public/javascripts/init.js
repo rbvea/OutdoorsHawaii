@@ -1,3 +1,4 @@
-$(document).ready(function($http) {
-    
+$(document).ready(function() {
 });
+
+

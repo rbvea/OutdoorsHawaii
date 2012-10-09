@@ -5,7 +5,7 @@ block content
     .row
       .twelve.columns#header
         h1 Outdoors Hawaii
-    .row
+    .row#content
       #sidebar.three.columns(ng-controller="optionsCtrl")
         dl.tabs#tabs
           dd(class="{{{true: 'active', false: ''}[current_tab == 'options']}}" , ng-click="current_tab = 'options'") 
@@ -18,10 +18,10 @@ block content
               dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
                 img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
                 {{option.name}}
-          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}")
-            | Insert parks here
-      #body.nine.columns
-        h3 Welcome to Outdoors Hawaii
-        p 
-        | We automatically found the parks within 20 miles of your current location.
-        | Use the sidebar to customize which sport or feature you'd like at your park.
+          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-controller="mapCtrl")
+            dl#parks-nav.side-nav.nav-bar.vertical
+              dd(ng-repeat="park in parks", ng-click="counter = counter + 1")
+                {{park.attributes.NAME}}
+      .nine.columns(ng-controller="mapCtrl")
+        {{counter}}
+        button(ng-click="counter = counter + 1")
