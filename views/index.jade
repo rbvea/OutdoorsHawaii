@@ -18,10 +18,9 @@ block content
               dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
                 img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
                 {{option.name}}
-          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-controller="mapCtrl")
-            dl#parks-nav.side-nav.nav-bar.vertical
-              dd(ng-repeat="park in parks", ng-click="counter = counter + 1")
+          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}")
+            dl#parks-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
+              dd(class="{{{true: 'active', false: ''}[$rootScope.current_park == park]}}", ng-repeat="park in parks", ng-click="$rootScope.current_park = park")
                 {{park.attributes.NAME}}
       .nine.columns(ng-controller="mapCtrl")
-        {{counter}}
-        button(ng-click="counter = counter + 1")
+        leaflet

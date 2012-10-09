@@ -2,14 +2,7 @@ var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/
 var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/2/query';
 var feature_attributes = ['ADACOMPLY', 'BASKETBALL','BUSSTOP','COMGARDEN','EXERCISEFLD','FOOTBALL','HIKING','LIGHTING','OUTCANOE','PLAYGROUND','RESTROOM','SHOWER','SOCCER','TENNIS','BASEBALL','BOATING','CAMPING','DRINKWATER','FISHING','GOLFING','JOGGING','MTBCYCLE','PICIC','RECVEHICLE','SHADETREE','SKATEBOARD','SWIMMING','VOLLEYBALL'];
 
-
-function parksCtrl($scope, $http) {
-    $http.get('parks/init').success(function(data) {
-        $scope.parks = data;
-    });
-};
-
-function mapCtrl($scope, $http) {
+function mapCtrl($rootScope, $http) {
     var config = {
         params: {
             where : '1=1',
@@ -36,21 +29,27 @@ function mapCtrl($scope, $http) {
 
     $http.jsonp(testUrl, config)
         .success(function(data) {
-            $scope.parks = data.features;
-            $scope.current_park = data.features[0]; 
+            angular.forEach(data.features, function(park) {
+                park.marker = new L.marker([park.geometry.y, park.geometry.x]).addTo($rootScope.map);
+            });
+
+            $rootScope.parks = data.features;
+            $rootScope.current_park = null;
         })
         .error(function (e) {
             console.log(e);
         });
 
-    $scope.counter = 0;
-
-    $scope.center =  {
+    $rootScope.center =  {
             lat: 21.460737,  // initial map center latitude
             lng: -157.9978180, // initial map center longitude
         };
-    $scope.zoom = 10;
 
+    $rootScope.zoom = 10;
+}
+
+function selectPark(park) {
+    console.log(park);
 }
 
 function optionsCtrl($scope, $http) {
