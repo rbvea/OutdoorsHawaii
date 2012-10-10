@@ -25,19 +25,20 @@ var directives = angular.module('outdoorshi.dirs', []).
                 $rootScope.markers = [];
 
                 $rootScope.$watch('current_park', function(old, changed) {
-                    if(typeof changed == 'undefined') {
-                        $rootScope.map.setView([position.coords.latitude , position.coords.longitude], 11);
+                    if(typeof changed == 'undefined' && typeof $rootScope.position != 'undefined') {
+                        $rootScope.map.setView([$rootScope.position.coords.latitude, $rootScope.position.coords.longitude], 15);
                     } else {
-                        $rootScope.map.setView([changed.geometry.y, changed.geometry.x], 15);
+                        $rootScope.map.panTo([changed.geometry.y, changed.geometry.x]);
                     }
                 });
 
                 $rootScope.selectPark = function(park) {
                     $rootScope.current_park = park;
-                    $rootScope.map.panTo([park.geometry.y, park.geometry.x]);
                 };
 
                 navigator.geolocation.getCurrentPosition(function(position) {
+
+                    $rootScope.position = position;
 
                     var bounds = 0.02;
                     var geo = position.coords.longitude - bounds + ",";
