@@ -10,6 +10,7 @@ var directives = angular.module('outdoorshi.dirs', []).
             replace: false, 
             require: mapCtrl,
             link: function(scope, iElement, iAttrs, controller) {
+
                 var map = new L.Map('map', {
                     minZoom: 10,
                     center: new L.LatLng(scope.center.lat, scope.center.lng),
@@ -24,12 +25,19 @@ var directives = angular.module('outdoorshi.dirs', []).
                 $rootScope.markers = [];
 
                 $rootScope.$watch('current_park', function(old, changed) {
-                    changed.marker.addTo($rootScope.map);
+                    if(typeof changed == 'undefined') {
+                        $rootScope.map.setView([position.coords.latitude , position.coords.longitude], 11);
+                    } else {
+                        $rootScope.map.setView([changed.geometry.y, changed.geometry.x], 15);
+                    }
                 });
 
-                
+                $rootScope.selectPark = function(park) {
+                    $rootScope.current_park = park;
+                    $rootScope.map.panTo([park.geometry.y, park.geometry.x]);
+                };
+
                 navigator.geolocation.getCurrentPosition(function(position) {
-                    map.setView([position.coords.latitude , position.coords.longitude], 15);
 
                     var bounds = 0.02;
                     var geo = position.coords.longitude - bounds + ",";
@@ -61,13 +69,17 @@ var directives = angular.module('outdoorshi.dirs', []).
                         },
                     };
 
-
                     $http.jsonp(testUrl, config)
                         .success(function(data) {
                             angular.forEach(data.features, function(park) {
                                 park.marker = new L.marker([park.geometry.y, park.geometry.x]).addTo(map);
+                                park.marker.on("click", function(e) {
+                                    $rootScope.selectPark(park);
+                                    $rootScope.$apply();
+                                });
                             });
                             $rootScope.parks = data.features;
+                            $rootScope.current_park = null;
                         })
                         .error(function (e) {
                             console.log(e);
@@ -76,5 +88,3 @@ var directives = angular.module('outdoorshi.dirs', []).
             }
         }
     });
-
-    

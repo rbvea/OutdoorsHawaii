@@ -10,41 +10,6 @@ function parksCtrl($scope, $http) {
 };
 
 function mapCtrl($scope, $http) {
-    var config = {
-        params: {
-            where : '1=1',
-            objectIds: null,
-            geometry: null,
-            geometryType: 'esriGeometryEnvelope',
-            inSR: "4326",
-            spatialRel: 'esriSpatialRelIntersects',
-            outFields: '*',
-            returnGeometry: true,
-            maxAllowableOffset: null,
-            geometryPrecision: null,
-            outSR: '4326',
-            returnIdsOnly: false,
-            returnCountOnly: false,
-            orderByFields: null,
-            groupByFieldsForStatistics: null,
-            outStatistics: null,
-            f: 'json',
-            token: null, 
-            callback: 'JSON_CALLBACK',
-        },
-    };
-
-    $http.jsonp(testUrl, config)
-        .success(function(data) {
-            console.log(data.features);
-            $scope.parks = data.features;
-        })
-        .error(function (e) {
-            console.log(e);
-        });
-    
-    $scope.current_park = null;
-
     $scope.center =  {
             lat: 21.460737,  // initial map center latitude
             lng: -157.9978180, // initial map center longitude
