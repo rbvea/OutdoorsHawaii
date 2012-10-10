@@ -3,11 +3,11 @@
   "version": "0.0.2",
   "private": true,
   "scripts": {
-    "start": "node app"
+    "start": "node app",
   },
   "dependencies": {
     "express": "3.0.0rc3",
-    "jade": "*"
+    "jade": "*",
   },
   "engines" : {
       "node" : "0.8.x",
