@@ -20,7 +20,7 @@ block content
                 {{option.name}}
           li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}")
             dl#parks-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
-              dd(class="{{{true: 'active', false: ''}[$rootScope.current_park == park]}}", ng-repeat="park in parks", ng-click="$rootScope.current_park = park")
+              dd(class="{{{true: 'active', false: ''}[angular.equals($rootScope.current_park , park)]}}", ng-repeat="park in parks", ng-click="selectPark(park)")
                 {{park.attributes.NAME}}
       .nine.columns(ng-controller="mapCtrl")
         leaflet
