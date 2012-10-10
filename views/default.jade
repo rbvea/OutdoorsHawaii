@@ -3,21 +3,22 @@ html
   head
     title= title
     script(src='//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js')
+
     script(src='/leaflet/leaflet.js')
     link(rel='stylesheet', href='/leaflet/leaflet.css')
-    link(rel='stylesheet', type='text/css',  href='/stylesheets/foundation.css')
+
+    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js')
+
     script(type='text/javascript', src='/javascripts/foundation/jquery.foundation.navigation.js')
     script(type='text/javascript', src='/javascripts/foundation/jquery.foundation.tabs.js')
     script(type='text/javascript', src='/javascripts/foundation/modernizr.foundation.js')
-    script(src="http://maps.googleapis.com/maps/api/js?key=AIzaSyAGg9347CHYHX3ocHv23nUl-DhR2YakYg8&sensor=false&language=en")
-    script(src='//ajax.googleapis.com/ajax/libs/angularjs/1.0.2/angular.js')
+    link(rel='stylesheet', type='text/css',  href='/stylesheets/foundation.css')
 
     script(src='/javascripts/app/application.js')
     script(src='/javascripts/app/controllers.js')
     script(src='/javascripts/app/directives.js')
     script(src='/javascripts/app/filters.js')
       
-    //script(type='text/javascript', src='/javascripts/angular-google-maps.js')
     link(rel='stylesheet', type='text/css' , href='/stylesheets/outdoorshi.css')
 
   body(ng-app="outdoorshi")
