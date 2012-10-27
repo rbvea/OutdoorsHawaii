@@ -22,5 +22,9 @@ function optionsCtrl($scope, $http) {
         $scope.opts = data.features;
     });
 
+    $scope.$watch('opts', function(changed, old) { 
+        console.log(changed);
+    });
+
     $scope.current_tab = 'parks'; 
 }

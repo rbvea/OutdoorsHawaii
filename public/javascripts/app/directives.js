@@ -27,17 +27,39 @@ directives.directive('leaflet', function($rootScope, $http) {
 
             $rootScope.$watch('current_park', function(changed , old) {
                 $rootScope.map.panTo([changed.geometry.y, changed.geometry.x]);
+                console.log(changed);
             });
 
             $rootScope.selectPark = function(park) {
                 $rootScope.current_park = park;
+                $http.jsonp(infoUrl, {
+                    params : {
+                        where : 'FACILITYID='+park.attributes.FACILITYID,
+                        objectIds: null,
+                        outFields: '*',
+                        returnIdsOnly: false,
+                        returnCountOnly: false,
+                        orderByFields: null,
+                        groupByFieldsForStatistics: null,
+                        f: 'json',
+                        token: null,
+                        callback: 'JSON_CALLBACK',
+                    }
+                })
+                .success(function (data) {
+                    angular.forEach(data.features, function (park) {
+                        $rootScope.current_park_features = park.attributes;
+                    });
+                })
+                .error(function () {
+                    console.log('whoops, an error happened.')
+                });
             };
 
             navigator.geolocation.getCurrentPosition(function(position) {
                 $rootScope.position = position;
 
                 $rootScope.map.setView([position.coords.latitude, position.coords.longitude], 14);
-
 
                 var bounds = 0.02;
                 var geo = position.coords.longitude - bounds + ",";

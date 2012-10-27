@@ -7,5 +7,17 @@ var filters = angular.module('outdoorshi.filters', []).
             }
             return active;
         }
+    }).
+    filter('filterByYes', function() {
+        return function(features) {
+            var features_avail = [];
+            for(key in features) {
+                if(features[key] == 'Yes') {
+                    features_avail.push(key);
+                }
+            }
+            return features_avail;
+        };
     });
+
 

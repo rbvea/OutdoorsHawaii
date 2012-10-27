@@ -12,8 +12,8 @@ h4 {
     padding: 0px;
 }
 
-#parkTab {
-    margin-top : 100px;
+#parksTab, #optionsTab {
+    margin-top : 89px;
 }
 
 #parks-nav , #options-nav {
@@ -22,7 +22,7 @@ h4 {
     line-height: 48px;
     margin-top: 89px;
     width: 100%;
-    height: 800px;
+    height: 500px;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
 }
@@ -34,6 +34,7 @@ ul.tabs-content {
 .tabs-content dd{
     font-size: 14px;
     border-bottom: 1px solid #777;
+    padding: 0 10px;
     background: #FAFAFA; 
 }
 
@@ -71,12 +72,42 @@ ul.tabs-content {
     width: 100%;
 }
 
-#content {
-    height: 100%;
+leaflet {
+    z-index: 0;
 }
 
 #map {
     position: relative;
-    width: 100%;
-    height: 800px;
+    width: 82%;
+    height: 500px;
+}
+
+#content {
+    display: inline-block;
+}
+
+#park_popup {
+    padding: 10px;
+    background: #FAFAFA;
+    z-index: 1028;
+    height: 500px;
+    width: 167px;
+    z-index: 1;
+    float: right;
+}
+  
+#content {
+    padding: 0;
+}
+
+ul#features {
+    list-style-type: none;
+}
+
+ul#features li {
+    border-bottom: 1px solid #333;
+}
+
+ul#features li:last-child {
+    border; none; 
 }
