@@ -23,13 +23,4 @@ block content
               dd(ng-repeat="park in parks", ng-click="selectPark(park)", ng-class="park | currentPark")
                 {{park.attributes.NAME}}
       #content.nine.columns(ng-controller="mapCtrl")
-        #park_popup
-          dl#features.unstyled
-            dd
-              Address
-              {{current_park.attributes.FULLADDR}}
-            dd(ng-repeat="feature in current_park_features | filterByYes")  
-              img.feature-pic(src="/images/icons/{{feature}}.svg")
-              {{feature}}
-          
         leaflet

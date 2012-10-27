@@ -3,7 +3,7 @@ var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/
 
 var directives = angular.module('outdoorshi.dirs', []);
 
-directives.directive('leaflet', function($rootScope, $http) {
+directives.directive('leaflet', function($rootScope, $http, $compile) {
     return {
         restrict: 'E',
         template: '<div id="map" class="angular-leaflet-map"></div>',
@@ -25,9 +25,12 @@ directives.directive('leaflet', function($rootScope, $http) {
             $rootScope.map = map;
             $rootScope.markers = [];
 
-            $rootScope.$watch('current_park', function(changed , old) {
+            $rootScope.$watch('current_park', function(changed) {
                 $rootScope.map.panTo([changed.geometry.y, changed.geometry.x]);
-                console.log(changed);
+                //var output = '<h3>Address: '+park.attributes.FULLADDR+'</h3';
+                changed.marker.bindPopup('<h4>'+changed.attributes.FULLADDR+'</h4>');
+                changed.marker.openPopup();
+                //changed.marker.openPopup();
             });
 
             $rootScope.selectPark = function(park) {
@@ -49,6 +52,10 @@ directives.directive('leaflet', function($rootScope, $http) {
                 .success(function (data) {
                     angular.forEach(data.features, function (park) {
                         $rootScope.current_park_features = park.attributes;
+                        $compile('<dl><dd ng-repeat="feature in current_park_features | filterByYes">{{feature}}</dd></dl>')($rootScope, function(elem, scope) {
+                            angular.element(scope.current_park.marker._popup._wrapper).append(elem[0]);
+                        });
+                        
                     });
                 })
                 .error(function () {

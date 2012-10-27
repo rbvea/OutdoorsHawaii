@@ -78,8 +78,8 @@ leaflet {
 
 #map {
     position: relative;
-    width: 82%;
-    height: 500px;
+    width: 100%;
+    height: 1024px;
 }
 
 #content {
@@ -100,14 +100,10 @@ leaflet {
     padding: 0;
 }
 
-ul#features {
-    list-style-type: none;
+dl#features dd {
+    text-transform: lowercase;
 }
 
-ul#features li {
-    border-bottom: 1px solid #333;
-}
-
-ul#features li:last-child {
+dl#features dd:last-child {
     border; none; 
 }
