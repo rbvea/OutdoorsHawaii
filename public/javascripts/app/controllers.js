@@ -17,7 +17,7 @@ function mapCtrl($scope, $http) {
     $scope.zoom = 10;
 }
 
-function optionsCtrl($scope, $http) {
+function optionsCtrl($scope, $http, $window) {
     $http.get('/json/attributes.json').success( function(data) {
         $scope.opts = data.features;
     });
@@ -27,4 +27,6 @@ function optionsCtrl($scope, $http) {
     });
 
     $scope.current_tab = 'parks'; 
+
+    console.log($window);
 }

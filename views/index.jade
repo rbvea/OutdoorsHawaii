@@ -13,14 +13,14 @@ block content
           dd(class="{{{true: 'active', false: ''}[current_tab == 'options']}}" , ng-click="current_tab = 'options'") 
             a(href="#") Filter
         ul.tabs-content
-          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}")
-            dl#options-nav.side-nav.nav-bar.vertical
-              dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
-                img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
-                {{option.name}}
-          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}")
+          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-style="{height : current_height }")
             dl#parks-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
               dd(ng-repeat="park in parks", ng-click="selectPark(park)", ng-class="park | currentPark")
                 {{park.attributes.NAME}}
+          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}", ng-style="{height : current_height}")
+            dl#options-nav.side-nav.nav-bar.vertical(style="height = $window.height()")
+              dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
+                img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
+                {{option.name}}
       #content.nine.columns(ng-controller="mapCtrl")
         leaflet
