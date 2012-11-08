@@ -1,5 +1,6 @@
-var testUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
+var parksUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
 var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/2/query';
+var hikesUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Hiking_Trails_Oahu/FeatureServer/0/query';
 
 var directives = angular.module('outdoorshi.dirs', []);
 
@@ -16,6 +17,7 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                 minZoom: 10,
                 center: new L.LatLng(scope.center.lat, scope.center.lng),
                 zoom: scope.zoom, 
+                crs: L.CRS.EPSG4326,
             });
 
             var tile = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/997/256/{z}/{x}/{y}.png', {
@@ -26,11 +28,13 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
             $rootScope.markers = [];
 
             $rootScope.$watch('current_park', function(changed) {
-                $rootScope.map.panTo([changed.geometry.y, changed.geometry.x]);
-                //var output = '<h3>Address: '+park.attributes.FULLADDR+'</h3';
-                changed.marker.bindPopup('<h4>'+changed.attributes.FULLADDR+'</h4>');
-                changed.marker.openPopup();
-                //changed.marker.openPopup();
+                if(changed.geometry != undefined){
+                    $rootScope.map.panTo([changed.geometry.y, changed.geometry.x]);
+                    //var output = '<h3>Address: '+park.attributes.FULLADDR+'</h3';
+                    changed.marker.bindPopup('<h4>'+changed.attributes.FULLADDR+'</h4>');
+                    changed.marker.openPopup();
+                    //changed.marker.openPopup();
+                }
             });
 
             $rootScope.selectPark = function(park) {
@@ -78,7 +82,7 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                     params: {
                         where : '1=1',
                         objectIds: null,
-                        geometry: geo, 
+                        geometry: null, 
                         geometryType: 'esriGeometryEnvelope',
                         inSR: "4326",
                         spatialRel: 'esriSpatialRelIntersects',
@@ -97,8 +101,8 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                         callback: 'JSON_CALLBACK',
                     },
                 };
-
-                $http.jsonp(testUrl, config)
+                /*
+                $http.jsonp(parksUrl, config)
                     .success(function(data) {
                         angular.forEach(data.features, function(park) {
                             park.marker = new L.marker([park.geometry.y, park.geometry.x]).addTo(map);
@@ -112,11 +116,24 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                     })
                     .error(function (e) {
                         console.log(e);
-                    });
-           },
-                                                     function() {
-                                                         console.log('failed');
-                                                     });
+                    });*/
+                $http.jsonp(hikesUrl, config)
+                     .success(function(data) {
+                         var test_hike = data.features[0];
+                         //console.log(test_hike.geometry.paths[0]);
+                         angular.forEach(test_hike.geometry.paths[0], function(hike) {
+                             var latlng = hike;
+                             hike = new L.LatLng(latlng[0], latlng[1]);
+                         });
+                         var polyline = new L.Polyline(test_hike.geometry.paths[0]).addTo(map);
+                         console.log(polyline);
+                     })
+                     .error(function (e) {
+                         consoel.log(e);
+                     });
+            },function() {
+                //handle all parks
+            });
         }
     }
 });

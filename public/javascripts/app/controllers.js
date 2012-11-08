@@ -23,10 +23,8 @@ function optionsCtrl($scope, $http, $window) {
     });
 
     $scope.$watch('opts', function(changed, old) { 
-        console.log(changed);
+        
     });
 
     $scope.current_tab = 'parks'; 
-
-    console.log($window);
 }
