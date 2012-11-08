@@ -17,7 +17,7 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                 minZoom: 10,
                 center: new L.LatLng(scope.center.lat, scope.center.lng),
                 zoom: scope.zoom, 
-                crs: L.CRS.EPSG4326,
+                //crs: L.CRS.EPSG4326,
             });
 
             var tile = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/997/256/{z}/{x}/{y}.png', {
@@ -119,17 +119,25 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                     });*/
                 $http.jsonp(hikesUrl, config)
                      .success(function(data) {
-                         var test_hike = data.features[0];
-                         //console.log(test_hike.geometry.paths[0]);
-                         angular.forEach(test_hike.geometry.paths[0], function(hike) {
-                             var latlng = hike;
-                             hike = new L.LatLng(latlng[0], latlng[1]);
+                         angular.forEach(data.features, function(hike) {
+                             var latlngs = [];
+                             angular.forEach(hike.geometry.paths, function(path) {
+                                 angular.forEach(path, function(plot) {
+                                     var latlng = plot; 
+                                     latlngs.push(new L.LatLng(plot[1], plot[0]));
+                                 });
+                                 var polyline = new L.Polyline(latlngs).addTo(map);
+                                 console.log(hike);
+                                 polyline.bindPopup("<h1>"+hike.attributes.TRAILNAME+"</h1>");
+                                 polyline.on("click", function(e) {
+                                     polyline.openPopup();
+                                     //map.fitBounds(new L.LatLngBounds(polyline._latlngs[0], polyline._latlngs[polyline._latlngs.length - 1]));
+                                 });
+                             });
                          });
-                         var polyline = new L.Polyline(test_hike.geometry.paths[0]).addTo(map);
-                         console.log(polyline);
                      })
                      .error(function (e) {
-                         consoel.log(e);
+                         console.log(e);
                      });
             },function() {
                 //handle all parks
