@@ -10,14 +10,20 @@ block content
         dl.tabs#tabs
           dd(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-click="current_tab = 'parks'") 
             a(href="#") Parks
+          dd(class="{{{true: 'active', false: ''}[current_tab == 'hikes']}}", ng-click="current_tab = 'hikes'") 
+            a(href="#") Hikes 
           dd(class="{{{true: 'active', false: ''}[current_tab == 'options']}}" , ng-click="current_tab = 'options'") 
             a(href="#") Filter
         ul.tabs-content
-          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-style="{height : current_height }")
+          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}",ng-style="{height : current_height}")
             dl#parks-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
               dd(ng-repeat="park in parks", ng-click="selectPark(park)", ng-class="park | currentPark")
                 {{park.attributes.NAME}}
-          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}", ng-style="{height : current_height}")
+          li#hikesTab(class="{{{true: 'active', false: ''}[current_tab == 'hikes']}}",ng-style="{height : current_height}")
+            dl#hikes-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
+              dd(ng-repeat="hike in hikes", ng-click="selectHike(hike)", ng-class="hike | currentHike")
+                {{hike.attributes.TRAILNAME}}
+          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}",ng-style="{height : current_height}")
             dl#options-nav.side-nav.nav-bar.vertical(style="height = $window.height()")
               dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
                 img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")

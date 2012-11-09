@@ -13,7 +13,7 @@ function mapCtrl($scope, $http) {
     $scope.center =  {
             lat: 21.460737,  // initial map center latitude
             lng: -157.9978180, // initial map center longitude
-        };
+    };
     $scope.zoom = 10;
 }
 

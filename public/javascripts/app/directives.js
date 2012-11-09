@@ -1,7 +1,6 @@
 var parksUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/0/query';
 var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Parks/FeatureServer/2/query';
 var hikesUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Hiking_Trails_Oahu/FeatureServer/0/query';
-
 var directives = angular.module('outdoorshi.dirs', []);
 
 directives.directive('leaflet', function($rootScope, $http, $compile) {
@@ -17,7 +16,6 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                 minZoom: 10,
                 center: new L.LatLng(scope.center.lat, scope.center.lng),
                 zoom: scope.zoom, 
-                //crs: L.CRS.EPSG4326,
             });
 
             var tile = L.tileLayer('http://{s}.tile.cloudmade.com/{key}/997/256/{z}/{x}/{y}.png', {
@@ -36,6 +34,11 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                     //changed.marker.openPopup();
                 }
             });
+
+            $rootScope.selectHike = function(hike) {
+                hike.line.openPopup(); 
+                $rootScope.current_hike = hike;
+            }
 
             $rootScope.selectPark = function(park) {
                 $rootScope.current_park = park;
@@ -93,7 +96,7 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                         outSR: '4326',
                         returnIdsOnly: false,
                         returnCountOnly: false,
-                        orderByFields: null,
+                        orderByFields: 'MUNICIPALITY', 
                         groupByFieldsForStatistics: null,
                         outStatistics: null,
                         f: 'json',
@@ -101,25 +104,59 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                         callback: 'JSON_CALLBACK',
                     },
                 };
-                /*
                 $http.jsonp(parksUrl, config)
                     .success(function(data) {
+
+                        $rootScope.grouped_parks = {
+                            Aiea: [],
+                            Ewa: [],
+                            Ewa_Beach: [],
+                            Haleiwa: [],
+                            Honolulu: [],
+                            Kaaawa: [],
+                            Kahuku: [],
+                            Kailua: [],
+                            Kaneohe: [],
+                            Kapolei: [],
+                            Laie: [],
+                            Mililani: [],
+                            Pearl_City: [],
+                            Wahiawa: [],
+                            Waialua: [],
+                            Waianae: [],
+                            Waimanalo: [],
+                            Waipahu: [],
+                            Waipio: [],
+                        };
+
                         angular.forEach(data.features, function(park) {
-                            park.marker = new L.marker([park.geometry.y, park.geometry.x]).addTo(map);
+                            park.marker = new L.marker([park.geometry.y, park.geometry.x]);
                             park.marker.on("click", function(e) {
                                 $rootScope.selectPark(park);
                                 $rootScope.$apply();
                             });
+                            if(park.attributes.MUNICIPALITY != null && $rootScope.grouped_parks[park.attributes.MUNICIPALITY.trim()] != undefined) {
+                                $rootScope.grouped_parks[park.attributes.MUNICIPALITY.trim()].push(park.marker);
+                            }
+                        });
+
+                        angular.forEach($rootScope.grouped_parks, function (group) {
+                            var cluster = new L.MarkerClusterGroup();
+                            angular.forEach(group, function(marker) {
+                                cluster.addLayer(marker);
+                            });
+                            $rootScope.map.addLayer(cluster);
                         });
                         $rootScope.parks = data.features;
                         $rootScope.current_park = null;
                     })
                     .error(function (e) {
                         console.log(e);
-                    });*/
+                    });
                 $http.jsonp(hikesUrl, config)
                      .success(function(data) {
                          angular.forEach(data.features, function(hike) {
+                             $rootScope.hikes = data.features;
                              var latlngs = [];
                              angular.forEach(hike.geometry.paths, function(path) {
                                  angular.forEach(path, function(plot) {
@@ -127,10 +164,11 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                                      latlngs.push(new L.LatLng(plot[1], plot[0]));
                                  });
                                  var polyline = new L.Polyline(latlngs).addTo(map);
-                                 console.log(hike);
+                                 hike.line = polyline;
                                  polyline.bindPopup("<h1>"+hike.attributes.TRAILNAME+"</h1>");
                                  polyline.on("click", function(e) {
                                      polyline.openPopup();
+                                     $rootScope.selectHike(hike);
                                      //map.fitBounds(new L.LatLngBounds(polyline._latlngs[0], polyline._latlngs[polyline._latlngs.length - 1]));
                                  });
                              });

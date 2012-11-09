@@ -12,11 +12,11 @@ h4 {
     padding: 0px;
 }
 
-#parksTab, #optionsTab {
+#parksTab, #hikesTab,  #optionsTab {
     margin-top : 89px;
 }
 
-#parks-nav , #options-nav {
+#parks-nav , #options-nav, #hikes-nav {
     position: relative; 
     list-style-type: none;
     line-height: 48px;
