@@ -3,7 +3,7 @@ var infoUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/
 var hikesUrl = 'http://services.arcgis.com/tNJpAOha4mODLkXz/ArcGIS/rest/services/Hiking_Trails_Oahu/FeatureServer/0/query';
 var directives = angular.module('outdoorshi.dirs', []);
 
-directives.directive('leaflet', function($rootScope, $http, $compile) {
+directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
     return {
         restrict: 'E',
         template: '<div id="map" class="angular-leaflet-map"></div>',
@@ -11,6 +11,10 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
         replace: true, 
         require: mapCtrl,
         link: function(scope, iElement, iAttrs, controller) {
+
+            angular.element("#map").css('height', angular.element(window).height() - 77);
+            var width = angular.element(window).width();
+            angular.element("#map").css('width', (width < 767) ? width :  width - (width / 4));
 
             var map = new L.Map('map', {
                 minZoom: 10,
@@ -22,8 +26,27 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                 key: '02e10ae557e042ab9d012ef400178054',
             }).addTo(map);
 
+            $rootScope.height = angular.element(window).height();
+
+            angular.element(window).resize(function() {
+                var width = angular.element(window).width();
+                angular.element("#map").css('width', (width < 767) ? width :  width - (width / 4));
+                $rootScope.map.invalidateSize(true);
+            });
+
             $rootScope.map = map;
             $rootScope.markers = [];
+
+            window.onorientationchange = function () {
+                var width = angular.element(window).width();
+                var height = angular.element(window).height();
+
+                angular.element("#map").css('width', (width < 767) ? width :  width - (width / 4));
+                angular.element("#map").css('height', height); 
+                angular.element("#parks-nav").css('height', height);
+                angular.element("#options-nav").css('height', height); 
+                $rootScope.map.invalidateSize(true);
+            };
 
             $rootScope.$watch('current_park', function(changed) {
                 if(changed.geometry != undefined){
@@ -40,8 +63,15 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                 $rootScope.current_hike = hike;
             }
 
-            $rootScope.selectPark = function(park) {
+           $rootScope.init = function (park, index) {
+               park.index = index;
+           } 
+
+            $rootScope.selectPark = function(park, nav) {
                 $rootScope.current_park = park;
+                if(!nav) {
+                    angular.element("#parks-nav").scrollTop(angular.element("#park_"+park.index).position().top);
+                };
                 $http.jsonp(infoUrl, {
                     params : {
                         where : 'FACILITYID='+park.attributes.FACILITYID,
@@ -132,7 +162,7 @@ directives.directive('leaflet', function($rootScope, $http, $compile) {
                         angular.forEach(data.features, function(park) {
                             park.marker = new L.marker([park.geometry.y, park.geometry.x]);
                             park.marker.on("click", function(e) {
-                                $rootScope.selectPark(park);
+                                $rootScope.selectPark(park, false);
                                 $rootScope.$apply();
                             });
                             if(park.attributes.MUNICIPALITY != null && $rootScope.grouped_parks[park.attributes.MUNICIPALITY.trim()] != undefined) {

@@ -18,13 +18,24 @@ function mapCtrl($scope, $http) {
 }
 
 function optionsCtrl($scope, $http, $window) {
+    angular.element("#parks-nav").css('height', angular.element(window).height()- 138);
+    angular.element("#options-nav").css('height', angular.element(window).height() - 138);
+
     $http.get('/json/attributes.json').success( function(data) {
         $scope.opts = data.features;
     });
+    
+    $scope.filterFeature = function (option) {
+        option.value = !option.value;
+    };
 
     $scope.$watch('opts', function(changed, old) { 
         
     });
+
+    $scope.isActive = function (option) {
+        return (option.value) ? 'active' : ''; 
+    };
 
     $scope.current_tab = 'parks'; 
 }

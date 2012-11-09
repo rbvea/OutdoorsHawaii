@@ -6,7 +6,9 @@ block content
       .twelve.columns#header
         h1 Outdoors Hawaii
     .row
-      #sidebar.three.columns(ng-controller="optionsCtrl")
+      p.show-for-small(ng-controller="optionsCtrl")
+        a(class="sidebar-button button", id="sidebarButton", href="#mobile-sidebar", ng-click="showNav()") Menu
+      nav#sidebar.three.columns.hide-for-small(ng-controller="optionsCtrl", role="navigation")
         dl.tabs#tabs
           dd(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}", ng-click="current_tab = 'parks'") 
             a(href="#") Parks
@@ -15,18 +17,18 @@ block content
           dd(class="{{{true: 'active', false: ''}[current_tab == 'options']}}" , ng-click="current_tab = 'options'") 
             a(href="#") Filter
         ul.tabs-content
-          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}",ng-style="{height : current_height}")
+          li#parksTab(class="{{{true: 'active', false: ''}[current_tab == 'parks']}}")
             dl#parks-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
-              dd(ng-repeat="park in parks", ng-click="selectPark(park)", ng-class="park | currentPark")
+              dd(ng-repeat="park in parks", ng-click="selectPark(park, true)", ng-class="park | currentPark", id="park_{{$index}}", ng-init="init(park, $index)")
                 {{park.attributes.NAME}}
           li#hikesTab(class="{{{true: 'active', false: ''}[current_tab == 'hikes']}}",ng-style="{height : current_height}")
             dl#hikes-nav.side-nav.nav-bar.vertical(ng-controller="mapCtrl")
               dd(ng-repeat="hike in hikes", ng-click="selectHike(hike)", ng-class="hike | currentHike")
                 {{hike.attributes.TRAILNAME}}
-          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}",ng-style="{height : current_height}")
+          li#optionsTab(class="{{{true: 'active', false: ''}[current_tab == 'options']}}", ng-style="{height : current_height}")
             dl#options-nav.side-nav.nav-bar.vertical(style="height = $window.height()")
-              dd(ng-repeat="option in opts", class="{{{true: 'active', false: ''}[option.value]}}", ng-click="option.value = !option.value")
+              dd(ng-repeat="option in opts", ng-click="filterFeature(option)", ng-class="isActive(option)")
                 img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
                 {{option.name}}
-      #content.nine.columns(ng-controller="mapCtrl")
+      #content.nine.columns(ng-controller="mapCtrl", role="main")
         leaflet
