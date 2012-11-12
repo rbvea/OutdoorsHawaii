@@ -1,6 +1,3 @@
-
-
-
 var http = require('http');
 /*
  * GET home page.
@@ -20,3 +17,7 @@ var options = {
 exports.landing = function(req, res) {
     res.render('landing');
 };
+
+exports.filters = function(req, res) {
+    res.render('filters');
+}

@@ -17,6 +17,15 @@ var filters = angular.module('outdoorshi.filters', []).
             return active;
         }
     }).
+    filter('currentGroup', function ($rootScope) {
+        return function(hike) {
+            var active = '';
+            if($rootScope.current_hike == hike) {
+                active += 'active';
+            }
+            return active;
+        }
+    }).
     filter('filterByYes', function() {
         return function(features) {
             var features_avail = [];

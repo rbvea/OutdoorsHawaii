@@ -29,6 +29,7 @@ app.get('/', routes.index);
 
 app.get('/landing', routes.landing);
 app.get('/parks/init', routes.init);
+app.get('/filters', routes.filters);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));

@@ -11,11 +11,14 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
         replace: true, 
         require: mapCtrl,
         link: function(scope, iElement, iAttrs, controller) {
-
-            angular.element("#map").css('height', angular.element(window).height() - 77);
+            var height = angular.element(window).height() - 128;
+            angular.element("#map").css('height', height);
             var width = angular.element(window).width();
-            angular.element("#map").css('width', (width < 767) ? width :  width - (width / 4));
-
+            angular.element("#map").css('width', (width < 767 || window.orientation == 0) ? width :  width * 0.75);
+            if (width < 767 ) {
+                angular.element("#sidebar").css('display', 'none');
+                angular.element("#map").css('float', 'left');
+            }
             var map = new L.Map('map', {
                 minZoom: 10,
                 center: new L.LatLng(scope.center.lat, scope.center.lng),
@@ -43,20 +46,8 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
 
                 angular.element("#map").css('width', (width < 767) ? width :  width - (width / 4));
                 angular.element("#map").css('height', height); 
-                angular.element("#parks-nav").css('height', height);
-                angular.element("#options-nav").css('height', height); 
                 $rootScope.map.invalidateSize(true);
             };
-
-            $rootScope.$watch('current_park', function(changed) {
-                if(changed.geometry != undefined){
-                    $rootScope.map.panTo([changed.geometry.y, changed.geometry.x]);
-                    //var output = '<h3>Address: '+park.attributes.FULLADDR+'</h3';
-                    changed.marker.bindPopup('<h4>'+changed.attributes.FULLADDR+'</h4>');
-                    changed.marker.openPopup();
-                    //changed.marker.openPopup();
-                }
-            });
 
             $rootScope.selectHike = function(hike) {
                 hike.line.openPopup(); 
@@ -69,9 +60,16 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
 
             $rootScope.selectPark = function(park, nav) {
                 $rootScope.current_park = park;
+
+                $rootScope.map.panTo([park.geometry.y, park.geometry.x]);
+
+                park.marker.bindPopup('<h4>'+park.attributes.FULLADDR+'</h4>');
+                park.marker.openPopup();
+
+                /*
                 if(!nav) {
                     angular.element("#parks-nav").scrollTop(angular.element("#park_"+park.index).position().top);
-                };
+                };*/
                 $http.jsonp(infoUrl, {
                     params : {
                         where : 'FACILITYID='+park.attributes.FACILITYID,
@@ -166,14 +164,14 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
                                 $rootScope.$apply();
                             });
                             if(park.attributes.MUNICIPALITY != null && $rootScope.grouped_parks[park.attributes.MUNICIPALITY.trim()] != undefined) {
-                                $rootScope.grouped_parks[park.attributes.MUNICIPALITY.trim()].push(park.marker);
+                                $rootScope.grouped_parks[park.attributes.MUNICIPALITY.trim()].push(park);
                             }
                         });
 
                         angular.forEach($rootScope.grouped_parks, function (group) {
                             var cluster = new L.MarkerClusterGroup();
-                            angular.forEach(group, function(marker) {
-                                cluster.addLayer(marker);
+                            angular.forEach(group, function(park) {
+                                cluster.addLayer(park.marker);
                             });
                             $rootScope.map.addLayer(cluster);
                         });

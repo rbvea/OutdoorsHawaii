@@ -13,18 +13,22 @@ h4 {
     z-index: 10001;
 }
 
-#parksTab, #hikesTab,  #optionsTab {
-    margin-top : 89px;
+#parksTab, #hikesTab {
+    margin-top: 88px; 
 }
 
-#parks-nav , #options-nav, #hikes-nav {
+.parks-nav , #options-nav, #hikes-nav {
     position: relative; 
     list-style-type: none;
     line-height: 48px;
-    margin-top: 89px;
+    margin-top: -29px;
     width: 100%;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
+}
+
+.parks-nav {
+    height: auto;
 }
 
 ul.tabs-content {
@@ -49,6 +53,7 @@ ul.tabs-content {
 #header {
     border-bottom: 1px solid #777;
     background: #00B73B;
+    display: inline-block; 
 }
 
 #header h1{
@@ -90,16 +95,6 @@ leaflet {
 
 #content {
     display: inline-block;
-}
-
-#park_popup {
-    padding: 10px;
-    background: #FAFAFA;
-    z-index: 1028;
-    height: 500px;
-    width: 167px;
-    z-index: 1;
-    float: right;
 }
   
 #content {

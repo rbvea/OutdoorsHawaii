@@ -15,11 +15,20 @@ function mapCtrl($scope, $http) {
             lng: -157.9978180, // initial map center longitude
     };
     $scope.zoom = 10;
+    
+    $scope.toggleActive = function(elem) {
+        var toggle = angular.element("#group_"+elem)
+        toggle.toggleClass('active');
+    };
+
+
 }
 
 function optionsCtrl($scope, $http, $window) {
-    angular.element("#parks-nav").css('height', angular.element(window).height()- 138);
-    angular.element("#options-nav").css('height', angular.element(window).height() - 138);
+
+    $scope.promptFilter = function() {
+        angular.element.facebox({ajax: "filters"});
+    }
 
     $http.get('/json/attributes.json').success( function(data) {
         $scope.opts = data.features;
