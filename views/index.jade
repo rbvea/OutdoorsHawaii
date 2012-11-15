@@ -5,6 +5,7 @@ block content
     .row(ng-controller="optionsCtrl")
       .twelve.columns#header
         a.small.button.round(style="float: right; margin-top: 28px;", ng-click="promptFilter()") Filter
+        a.fc-webicon.foursquare(style="float: right; margin-top: 28px;", ng-click="promptFoursquare()") Foursquare
         h1 Outdoors Hawaii
     .row
       nav#sidebar.three.columns.hide-for-portrait(ng-controller="optionsCtrl", role="navigation")

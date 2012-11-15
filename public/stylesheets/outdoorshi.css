@@ -10,18 +10,17 @@ h4 {
 #sidebar {
     position: absolute;  
     padding: 0px;
-    z-index: 10001;
 }
 
 #parksTab, #hikesTab {
     margin-top: 88px; 
 }
 
-.parks-nav , #options-nav, #hikes-nav {
+.parks-nav ,  #hikes-nav {
     position: relative; 
     list-style-type: none;
     line-height: 48px;
-    margin-top: -29px;
+    margin-top: -20px;
     width: 100%;
     overflow: scroll;
     -webkit-overflow-scrolling: touch;
@@ -35,14 +34,18 @@ ul.tabs-content {
     margin-top: -89px;
 }
 
-.tabs-content dd{
+.tabs-content dd, #options-nav dd{
     font-size: 14px;
     border-bottom: 1px solid #777;
     padding: 0 10px;
     background: #FAFAFA; 
 }
 
-.tabs-content dd.active {
+#options-nav dd {
+    padding: 10px;
+}
+
+.tabs-content dd.active, #options-nav dd.active {
     background: #00B73B;
 }
 
@@ -89,10 +92,6 @@ leaflet {
     padding: 2px 5px; 
 }
 
-.leaflet-popup-pane dd:nth-child(odd) {
-    background: #BABABA;
-}
-
 #content {
     display: inline-block;
 }
@@ -101,10 +100,29 @@ leaflet {
     padding: 0;
 }
 
+dl#features {
+    padding: 10px;
+}
+
+
 dl#features dd {
     text-transform: lowercase;
 }
 
 dl#features dd:last-child {
     border; none; 
+}
+
+#features dd{
+    display: inline;
+}
+
+.placeholder {
+    height: 10px;
+    width: 10px;
+    margin: 2px 5px;
+}
+
+#facebox {
+    z-index: 1001;
 }

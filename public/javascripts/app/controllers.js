@@ -20,15 +20,21 @@ function mapCtrl($scope, $http) {
         var toggle = angular.element("#group_"+elem)
         toggle.toggleClass('active');
     };
-
-
 }
 
-function optionsCtrl($scope, $http, $window) {
+function optionsCtrl($scope, $http, $window, $compile) {
 
     $scope.promptFilter = function() {
-        angular.element.facebox({ajax: "filters"});
+        $http.get('filters').success(function(data) {
+            angular.element.facebox($compile(data)($scope));
+        });
     }
+
+    $scope.promptFoursquare = function() {
+        $http.get('/foursquare').success(function(data) {
+            angular.element.facebox($compile(data)($scope));
+        });
+    };
 
     $http.get('/json/attributes.json').success( function(data) {
         $scope.opts = data.features;

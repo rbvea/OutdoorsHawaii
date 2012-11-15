@@ -57,10 +57,11 @@
   text-align: center;
 }
 
+/*
 #facebox img {
   border: 0;
   margin: 0;
-}
+}*/
 
 #facebox_overlay {
   position: fixed;

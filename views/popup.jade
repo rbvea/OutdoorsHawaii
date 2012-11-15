@@ -1,0 +1,11 @@
+#popup
+
+  h4 {{current_park.attributes.NAME}}
+  p {{current_park.attributes.FULLADDR}}
+  - if (venue)
+    dl#foursquare
+      dd
+        a.fc-webicon.foursquare.small
+        strong Foursquare stats:
+      dd= "Check ins:" + venue.stats.checkinsCount
+      dd= "Users: " + venue.stats.usersCount  

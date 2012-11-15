@@ -13,6 +13,8 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
         link: function(scope, iElement, iAttrs, controller) {
             var height = angular.element(window).height() - 128;
             angular.element("#map").css('height', height);
+            angular.element("#parks-nav").css('height', height);
+            angular.element("#hikes-nav").css('height', height);
             var width = angular.element(window).width();
             angular.element("#map").css('width', (width < 767 || window.orientation == 0) ? width :  width * 0.75);
             if (width < 767 ) {
@@ -60,16 +62,24 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
 
             $rootScope.selectPark = function(park, nav) {
                 $rootScope.current_park = park;
-
                 $rootScope.map.panTo([park.geometry.y, park.geometry.x]);
+                $http.get('/popup', 
+                          { 
+                              params: {
+                                  lat: park.geometry.y,
+                                  lng: park.geometry.x, 
+                                  name: park.attributes.NAME,
+                              },
+                          }
+                          ).success(function(popup) {
+                              $compile(popup)($rootScope, function(elem, scope) {
+                                  park.marker.bindPopup(elem[0]);
+                                  park.marker.openPopup();
+                              });
+                          }).error(function(e) {
+                              console.log(e);
+                          });
 
-                park.marker.bindPopup('<h4>'+park.attributes.FULLADDR+'</h4>');
-                park.marker.openPopup();
-
-                /*
-                if(!nav) {
-                    angular.element("#parks-nav").scrollTop(angular.element("#park_"+park.index).position().top);
-                };*/
                 $http.jsonp(infoUrl, {
                     params : {
                         where : 'FACILITYID='+park.attributes.FACILITYID,
@@ -87,13 +97,12 @@ directives.directive('leaflet', function($rootScope, $http, $compile, $window) {
                 .success(function (data) {
                     angular.forEach(data.features, function (park) {
                         $rootScope.current_park_features = park.attributes;
-                        $compile('<dl><dd ng-repeat="feature in current_park_features | filterByYes">{{feature}}</dd></dl>')($rootScope, function(elem, scope) {
-                            angular.element(scope.current_park.marker._popup._wrapper).append(elem[0]);
+                        $compile('<dd ng-repeat="feature in current_park_features | filterByYes"><img class="feature-pic" src="/images/icons/{{feature}}.svg"/></dd>')($rootScope, function(elem, scope) {
+                            angular.element("#popup dl#features").append(elem[0]);
                         });
-                        
                     });
                 })
-                .error(function () {
+                .error(function (e) {
                     console.log('whoops, an error happened.')
                 });
             };

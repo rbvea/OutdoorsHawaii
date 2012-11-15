@@ -1,0 +1,54 @@
+user icons:
+- current location
+- dunno how to differentiate between parks... maybe by popularity?
+Markers with different colors maybe?
+- Maybeee start/finish markers for hikes
+
+features: 
+
+LIGHTING
+RESTROOM
+SHOWER 
+STAFFED -- need?
+PAYPHONE --need
+ADACOMPLY 
+ADAPARKING --need?
+CAMPING 
+RECVEHICLE
+SWIMMING
+LIFEGUARD -- need
+HIKING 
+FISHING
+PICNIC
+BOATING
+HUNTING -- need
+ROADCYCLE -- need?
+MTBCYCLE -- need?
+PLAYGROUND
+GOLF -- need
+SKI -- don't need
+SOCCER
+BASEBALL
+SOFTBALL -- need?
+BASKETBALL
+FOOTBALL
+RUGBY -- need?
+TENNIS
+VOLLEYBALL
+TETHERBALL --need?
+COMGARDEN
+JOGGING 
+EXERCISEFLD
+SKATING 
+SKATEBOARD
+OUTCANOE 
+GYMNASTICS 
+INDOORREC -- need
+ARTWORK -- need
+LANDSCAPE -- need?
+BLEACHER -- need?
+BUSSTOP -- the icon I found isn't really that good
+CONCESSION -- need
+DRINKWATER  
+HISTORYSITE -- kamehameha statue thing?
+SHADETREE

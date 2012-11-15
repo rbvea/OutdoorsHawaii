@@ -1,1 +1,10 @@
-hello
+.row(ng-controller="optionsCtrl")
+  h1 Filter by...
+  .six.columns(style="border-right: 1px solid #777;")
+    h3 Features
+    dl#options-nav.side-nav.nav-bar(style="height: 400px; overflow: scroll; border: 1px solid #777")
+      dd(ng-repeat="option in opts", ng-click="filterFeature(option)", ng-class="isActive(option)")
+        img.feature-pic(ng-src="/images/icons/{{option.key}}.svg")
+        {{option.name}}
+  .six.columns
+    a.small.button.round Find My Location

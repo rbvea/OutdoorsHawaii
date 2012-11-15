@@ -4,6 +4,7 @@
 
 var express = require('express')
   , routes = require('./routes')
+  , social = require('./routes/social.js')
   , http = require('http')
   , path = require('path');
 
@@ -30,6 +31,11 @@ app.get('/', routes.index);
 app.get('/landing', routes.landing);
 app.get('/parks/init', routes.init);
 app.get('/filters', routes.filters);
+
+app.get('/foursquare', social.foursquare);
+app.get('/auth/foursquare', social.foursquare_login);
+app.get('/auth/foursquare/callback', social.foursquare_callback);
+app.get('/popup', social.popup);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log("Express server listening on port " + app.get('port'));
